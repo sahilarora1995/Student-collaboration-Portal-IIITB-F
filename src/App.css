@@ -1,38 +1,138 @@
+body { 
+  background-image: url("bg.jpg");
+}
+
+.login
+{
+background-image: url("bg.jpg");
+}
 .App {
-  text-align: center;
+text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+animation: App-logo-spin infinite 20s linear;
+height: 80px;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+background-color: #222;
+height: 150px;
+padding: 20px;
+color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-intro {
+font-size: large;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+}
+FormCenter {
+margin-bottom: 100px;
+}
+
+.FormTitle {
+color: #707C8B;
+font-weight: 300;
+margin-bottom: 50px;
+}
+
+.FormTitle__Link {
+color: #707C8B;
+text-decoration: none;
+display: inline-block;
+font-size: 1.7em;
+margin: 0 10px;
+padding-bottom: 5px;
+}
+
+.FormTitle__Link:first-child {
+margin-left: 0;
+}
+
+.FormTitle__Link--Active {
+color: white;
+border-bottom: 1px solid #199087;
+}
+
+.FormField {
+margin-bottom: 40px;
+}
+
+.FormField__Label {
+display: block;
+text-transform: uppercase;
+font-size: 2em;
+color: black;
+font-family: Impact, Charcoal, sans-serif;
+}
+.FormField__Input {
+width: 85%;
+background-color: transparent;
+border: none;
+color: blue;
+outline: none;
+border-bottom: 1px solid #445366;
+font-size: 1em;
+font-weight: 300;
+padding-bottom: 10px;
+margin-top: 10px;
+}
+
+.FormField__Input::placeholder {
+color: #616E7F;
+}
+
+.FormField__Button {
+background-color: blue;
+color: white;
+border: none;
+outline: none;
+border-radius: 10px;
+padding: 15px 30px;
+font-size: .8em;
+font-weight: 400;
+white-space: pre-line;
+}
+
+.FormField__Buttonp {
+background-color: red;
+color: white;
+border: none;
+outline: none;
+border-radius: 20px;
+padding: 15px 30px;
+font-size: 1em;
+font-weight: 450;
+white-space: pre-line;
+}
+
+.FormField__Link {
+color: #66707D;
+text-decoration: none;
+display: inline-block;
+border-bottom: 1.5px solid #225E62;
+padding-bottom: 5px;
+}
+
+.FormField__CheckboxLabel {
+color: #646F7D;
+font-size: .9em;
+}
+
+.FormField__Checkbox {
+position: relative;
+top: 1.5px;
+}
+
+.FormField__TermsLink {
+color: white;
+border-bottom: 1px solid #199087;
+text-decoration: none;
+display: inline-block;
+padding-bottom: 2px;
+margin-left: 5px;
 }

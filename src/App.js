@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter as Router, Route} from 'react-router-dom'
+import Welcome from './pages/Welcome'
+import subjects from './pages/subjects'
+import semester from './pages/semester'
+import Dropdown from './pages/Dropdown'
+import NavigationBar from './components/NavigationBar'
+import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  render() {
+
+
+
+
+    return (
+
+
+      <Router basename="/react-auth-ui/">
+        <NavigationBar/>
+
+          <Route exact path='/' component={Welcome}>
+          </Route>
+          <Route exact path='/semester' component={semester}>
+          </Route>
+           <Route exact path='/subjects' component={subjects}>
+          </Route>
+          <Route exact path='/Dropdown' component={Dropdown}>
+          </Route>
+          </Router>
+    )
+  }
 }
 
-export default App;
+export default App

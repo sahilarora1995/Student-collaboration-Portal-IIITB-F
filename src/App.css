@@ -98,17 +98,41 @@ font-weight: 400;
 white-space: pre-line;
 }
 
-.FormField__Buttonp {
+
+
+.FormField__Buttonp:hover {
+opacity: 1;
 background-color: red;
 color: white;
 border: none;
 outline: none;
+border-style: solid;
+border-color: coral;
+ opacity: 0.5;
 border-radius: 20px;
 padding: 15px 30px;
 font-size: 1em;
 font-weight: 450;
 white-space: pre-line;
 }
+
+
+.FormField__Buttonp: {
+opacity: 1;
+background-color: black;
+color: white;
+border: none;
+outline: none;
+border-style: solid;
+border-color: coral;
+ opacity: 0.5;
+border-radius: 20px;
+padding: 15px 30px;
+font-size: 1em;
+font-weight: 450;
+white-space: pre-line;
+}
+
 
 .FormField__Link {
 color: #66707D;

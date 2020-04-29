@@ -32,7 +32,7 @@ class Dropdown extends Component {
       
    }
 
-   handleClick() { this.props.history.push('/subjects'); console.log('this is:', this); } 
+   handleClick() { this.props.history.push('/getorPost'); console.log('this is:', this); } 
    handleClickp() { this.props.history.push('/'); console.log('this is:', this); }
    render() {
       const marginTop={
@@ -40,6 +40,7 @@ class Dropdown extends Component {
         alignItems:"center"
       }
      
+      
     return (
       <center>
       <Container>
@@ -63,7 +64,7 @@ class Dropdown extends Component {
             <option     className="FormField__Label" value="2020">2020</option>
           </select>
         </label>
-        <input  className="FormField__Button mr-20" type="submit" value="Submit" />
+        <input  className="FormField__Button mr-20" type="submit" value="Submit" onClick={() => this.handleClick()} />
         </div>
       </form>
       </div>

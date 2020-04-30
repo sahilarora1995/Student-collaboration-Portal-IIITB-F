@@ -37,7 +37,7 @@ class App extends Component {
           <Route exact path='/getorPost' component={getorPost}/>
           <Route exact path='/post' component={post}/>
           <Route exact path='/get' component={get}/>
-          
+      
         </Col>
       </Router>
     )

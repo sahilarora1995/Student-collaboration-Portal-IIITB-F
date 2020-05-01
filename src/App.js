@@ -7,7 +7,7 @@ import semester from './pages/semester'
 import Dropdown from './pages/Dropdown'
 import getorPost from './pages/getorPost'
 import post from './pages/post';
-//import get from './pages/get';
+import get from './pages/get';
 import login from './pages/login'
 import register from './pages/register'
 import NavigationBar from './components/NavigationBar'
@@ -36,7 +36,8 @@ class App extends Component {
           <Route exact path='/Dropdown' component={Dropdown}/>
           <Route exact path='/getorPost' component={getorPost}/>
           <Route exact path='/post' component={post}/>
-          
+          <Route exact path='/get' component={get}/>
+      
         </Col>
       </Router>
     )

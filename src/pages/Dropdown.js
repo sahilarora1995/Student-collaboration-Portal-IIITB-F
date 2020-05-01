@@ -14,27 +14,29 @@ class Dropdown extends Component {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    if(this.state.value== 'c')
-    {
-      this.props.history.push('/');
-    }
-    else if (this.state.value=='p') {
-      this.props.history.push('/');
-    }
-    event.preventDefault();
-  }
-  
-    onSubmit = () => {
-          this.props.history.push('/');
+        this.setState({value: event.target.value});
+      }
+    
+      handleSubmit(event) {
+       
       
-   }
+            localStorage.setItem('year',JSON.stringify(this.state.value));
+            
 
-   handleClick() { this.props.history.push('/getorPost'); console.log('this is:', this); } 
-   handleClickp() { this.props.history.push('/'); console.log('this is:', this); }
+            const prod={
+  subject:JSON.parse(localStorage.getItem('id')),
+  year: JSON.parse(localStorage.getItem('year')),
+  resourceType: JSON.parse(localStorage.getItem('resourcetype')),
+  semester: JSON.parse(localStorage.getItem('sem')),
+};
+            console.log(prod)
+            
+
+          this.props.history.push('/getorPost');
+        
+        event.preventDefault();
+      }
+
    render() {
       const marginTop={
         marginTop:"20px",
@@ -56,7 +58,7 @@ class Dropdown extends Component {
                 <h1> SELECT THE YEAR :</h1>
                 </Jumbotron>
           
-          <select className="FormField__Buttonp mr-20" value={this.state.value} onChange={this.handleChange}>
+          <select className="FormField__Buttonp mr-20" value={this.state.value} onClick={this.handleChange}>
             <option   className="FormField__Label" value="2014">2014</option>
             <option    className="FormField__Label" value="2015">2015</option>
             <option     className="FormField__Label" value="2016">2016</option>
@@ -66,7 +68,7 @@ class Dropdown extends Component {
             <option     className="FormField__Label" value="2020">2020</option>
           </select>
         </label>
-        <input  className="FormField__Button mr-20" type="submit" value="Submit" onClick={() => this.handleClick()} />
+        <input  className="FormField__Button mr-20" type="submit" value="Submit" onChange={this.handleChange} />
         </div>
       </form>
       </div>

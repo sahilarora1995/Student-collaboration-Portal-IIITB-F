@@ -16,7 +16,7 @@ class getorPost extends Component {
     event.preventDefault();
   }
 
-   handlePost() { this.props.history.push('/post'); console.log('this is:', this); } 
+   handlePost() { this.props.history.push('/postd'); console.log('this is:', this); } 
    handleGet() { this.props.history.push('/get'); console.log('this is:', this); }
 
     render() {

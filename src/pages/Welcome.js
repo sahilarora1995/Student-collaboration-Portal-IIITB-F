@@ -12,30 +12,20 @@ class Welcome extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+        
+        this.setState({value: event.target.value});
+      }
+    
+      handleSubmit(event) {
+            console.log(event.target.id)
+            localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
+          this.props.history.push('/semester');
+        
+        event.preventDefault();
+      }
 
-  handleSubmit(event) {
-    if(this.state.value== 'c')
-    {
-      this.props.history.push('/');
-    }
-    else if (this.state.value=='p') {
-      this.props.history.push('/');
-    }
-    event.preventDefault();
-  }
   
-    onSubmit = () => {
-          this.props.history.push('/');
-      
-   }
-
-   handleClick() { this.props.history.push('/semester'); console.log('this is:', this); } 
-   handleClickp() { this.props.history.push('/'); console.log('this is:', this); }
-
     render() {
       const marginTop={
         marginTop:"20px",
@@ -59,17 +49,17 @@ class Welcome extends Component {
                 <div className="FormCenter" >
                     <form onSubmit={this.handleSubmit} className="FormFields">
                       <div className="FormField">
-                        <label className="FormField__Label" htmlFor="name">WELCOME TO STUDENT COLLOLABORATION PORTAL</label>
-              
+                      <span>WELCOME TO STUDENT COLLOLABORATION PORTAL </span>
+                                    
                     
                       </div>
         
                       <div className="FormField">
                   
-                   <input  className="FormField__Button mr-20"  type="submit" value="PREVIOUS YEAR QUESTIONS"  onClick={() => this.handleClick()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="BLOGS BY SENIORS"  onClick={() => this.handleClicky()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="TIPS BY SENIORS"  onClick={() => this.handleClicky()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="IMPORTANT VIDEO RESOURCES"  onClick={() => this.handleClickp()} />
+                   <input  className="FormField__Button mr-20"  type="submit" value="PREVIOUS YEAR QUESTIONS"  onClick={this.handleChange} /> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="BLOGS BY SENIORS"  onClick={this.handleChange}/> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="TIPS BY SENIORS"  onClick={this.handleChange} /> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="IMPORTANT VIDEO RESOURCES" onClick={this.handleChange} />
     
               
                       </div>

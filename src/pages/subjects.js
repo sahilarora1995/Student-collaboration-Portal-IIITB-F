@@ -12,30 +12,20 @@ class subjects extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+        
+        this.setState({value: event.target.value});
+      }
+    
+      handleSubmit(event) {
+          
+            localStorage.setItem('id',JSON.stringify(this.state.value));
+          this.props.history.push('/Dropdown');
+        
+        event.preventDefault();
+      }
 
-  handleSubmit(event) {
-    if(this.state.value== 'c')
-    {
-      this.props.history.push('/');
-    }
-    else if (this.state.value=='p') {
-      this.props.history.push('/');
-    }
-    event.preventDefault();
-  }
   
-    onSubmit = () => {
-          this.props.history.push('/');
-      
-   }
-
-   handleClick() { this.props.history.push('/Dropdown'); console.log('this is:', this); } 
-   handleClickp() { this.props.history.push('/'); console.log('this is:', this); }
-
     render() {
       const marginTop={
         marginTop:"20px",
@@ -59,17 +49,17 @@ class subjects extends Component {
                 <div className="FormCenter" >
                     <form onSubmit={this.handleSubmit} className="FormFields">
                       <div className="FormField">
-                        <label className="FormField__Label" htmlFor="name">CHOOSE THE SUBJECTS</label>
+                        <label className="FormField__Label" htmlFor="name">WELCOME TO STUDENT COLLOLABORATION PORTAL</label>
               
                     
                       </div>
         
                       <div className="FormField">
                   
-                   <input  className="FormField__Button mr-20"  type="submit" value="ALGORITHMS"  onClick={() => this.handleClick()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="NETWORKS"  onClick={() => this.handleClickU()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="ML"  onClick={() => this.handleClickU()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="MML"  onClick={() => this.handleClickp()} />
+                   <input  className="FormField__Button mr-20"  type="submit" value="ALGO"  onClick={this.handleChange} /> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="MML"  onClick={this.handleChange}/> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="WAN"  onClick={this.handleChange} /> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="ML" onClick={this.handleChange} />
     
               
                       </div>

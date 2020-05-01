@@ -14,27 +14,14 @@ class semester extends Component {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    if(this.state.value== 'c')
-    {
-      this.props.history.push('/');
-    }
-    else if (this.state.value=='p') {
-      this.props.history.push('/');
-    }
-    event.preventDefault();
-  }
-  
-    onSubmit = () => {
-          this.props.history.push('/');
-      
-   }
-
-   handleClick() { this.props.history.push('/subjects'); console.log('this is:', this); } 
-   handleClickp() { this.props.history.push('/'); console.log('this is:', this); }
+        this.setState({value: event.target.value});
+      }
+    
+      handleSubmit(event) {
+          localStorage.setItem('sem',JSON.stringify(this.state.value));
+          this.props.history.push('/subjects');
+        event.preventDefault();
+      }
 
     render() {
       const marginTop={
@@ -58,10 +45,10 @@ class semester extends Component {
                         <label className="FormField__Label" htmlFor="name">CHOOSE THE SEMESTER </label>                    
                       </div>
                       <div className="FormField">         
-                   <input  className="FormField__Button mr-20"  type="submit" value="I"  onClick={() => this.handleClick()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="II"  onClick={() => this.handleClickU()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="III"  onClick={() => this.handleClickU()} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="IV"  onClick={() => this.handleClickp()} />
+                   <input  className="FormField__Button mr-20"  type="submit" value="I"  onChange={this.handleChange}/> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="II"  onClick={this.handleChange} /> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="III"  onClick={this.handleChange} /> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="IV"  onClick={this.handleChange} />
                       </div>
                     </form>
                   </div>

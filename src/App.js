@@ -6,13 +6,11 @@ import subjects from './pages/subjects'
 import semester from './pages/semester'
 import Dropdown from './pages/Dropdown'
 import getorPost from './pages/getorPost'
-import post from './pages/post';
-<<<<<<< HEAD
-//import get from './pages/get';
-=======
+import postd from './pages/postd';
 import get from './pages/get';
->>>>>>> aff5400ab461acd15c9ec3fbb140c8954115d434
 import login from './pages/login'
+import verify from './pages/verify'
+import verified from './pages/verified'
 import register from './pages/register'
 import NavigationBar from './components/NavigationBar'
 import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
@@ -39,14 +37,15 @@ class App extends Component {
           <Route exact path='/subjects' component={subjects}/>
           <Route exact path='/Dropdown' component={Dropdown}/>
           <Route exact path='/getorPost' component={getorPost}/>
-          <Route exact path='/post' component={post}/>
-<<<<<<< HEAD
-          
-          
-=======
+          <Route exact path='/postd' component={postd}/>
           <Route exact path='/get' component={get}/>
-      
->>>>>>> aff5400ab461acd15c9ec3fbb140c8954115d434
+          <Route exact path='/verify' component={verify}/>
+          <Route exact path='/verified' component={verified}/>
+          
+
+          
+          
+
         </Col>
       </Router>
     )

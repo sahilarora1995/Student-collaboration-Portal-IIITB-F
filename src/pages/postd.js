@@ -21,13 +21,15 @@ class postd extends React.Component {
   onChange(e) {
     this.setState({file:e.target.files[0]})
   }
+   handleClick() { this.props.history.push('/verify');  } 
   fileUpload(file){
     const url = 'http://localhost:8000/postData/';
     const formData = new FormData();
     formData.set('subject',JSON.parse(localStorage.getItem('id')))
     formData.set('year',JSON.parse(localStorage.getItem('year')))
     formData.set('resourceType',JSON.parse(localStorage.getItem('resourcetype')))
-    //formData.set('semester',JSON.parse(localStorage.getItem('sem')))
+    console.log(JSON.parse(localStorage.getItem('sem')))
+    formData.set('semester',JSON.parse(localStorage.getItem('sem')))
     
     formData.append('file',file)
     const config = {
@@ -43,7 +45,7 @@ class postd extends React.Component {
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
         <input type="file" onChange={this.onChange} />
-        <button type="submit">Upload</button>
+        <button type="submit" onClick={() => this.handleClick()}>Upload</button>
       </form>
    )
   }

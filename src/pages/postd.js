@@ -42,10 +42,14 @@ class postd extends React.Component {
 
   render() {
     return (
+      
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
-        <input type="file" onChange={this.onChange} />
-        <button type="submit" onClick={() => this.handleClick()}>Upload</button>
+        <input class="btn"type="file" onChange={this.onChange} />
+        <div class="upload-btn-wrapper">
+ 
+</div>
+        <button class="btn" type="submit" onClick={() => this.handleClick()}>Upload</button>
       </form>
    )
   }

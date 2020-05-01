@@ -7,9 +7,8 @@ import * as serviceWorker from './serviceWorker';
 // keeping track of login status
 localStorage.setItem('loggedin',false);
 ReactDOM.render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 

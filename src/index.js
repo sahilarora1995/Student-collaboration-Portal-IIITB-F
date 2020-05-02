@@ -4,8 +4,6 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// keeping track of login status
-localStorage.setItem('loggedin',false);
 ReactDOM.render(
     <App />
   ,

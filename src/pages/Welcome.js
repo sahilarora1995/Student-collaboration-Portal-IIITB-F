@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
@@ -12,31 +12,33 @@ class Welcome extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(event) {
-        
+  handleChange(event)
+  {
         this.setState({value: event.target.value});
-      }
+  }
     
-      handleSubmit(event) {
-            console.log(event.target.id)
-            localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
-          this.props.history.push('/semester');
+  handleSubmit(event) {
+    console.log(event.target.id)
+    localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
+    this.props.history.push('/semester');
         
-        event.preventDefault();
-      }
+    event.preventDefault();
+  }
 
-  
-    render() {
+  render() {
+    if(localStorage.getItem('loggedin')==='false')
+    {
+      alert("you have to log in");
+      return <Redirect to="/"/> ;
+    }
       const marginTop={
         marginTop:"20px",
         alignItems:"center"
       }
-     
-
         return (
           
           <center>
-            <NavigationBar history={this.props.history}/>
+            <NavigationBar/>
           <Container >
             <Row>
               <Col lg={12} style={marginTop}>

@@ -29,20 +29,20 @@ class App extends Component {
       <Router basename="/react-auth-ui/">
         <NavigationBar/>
         <Col lg={12} style={marginTop}>
+          <switch>
+            <Route exact path='/' component={login}/>
+            <Route exact path='/register' component={register}/>
+            <Route exact path='/welcome' component={Welcome}/>
+            <Route exact path='/semester' component={semester}/>
+            <Route exact path='/subjects' component={subjects}/>
+            <Route exact path='/Dropdown' component={Dropdown}/>
+            <Route exact path='/getorPost' component={getorPost}/>
+            <Route exact path='/postd' component={postd}/>
+            <Route exact path='/get' component={get}/>
+            <Route exact path='/verify' component={verify}/>
+            <Route exact path='/verified' component={verified}/>
           
-          <Route exact path='/' component={login}/>
-          <Route exact path='/register' component={register}/>
-          <Route exact path='/welcome' component={Welcome}/>
-          <Route exact path='/semester' component={semester}/>
-          <Route exact path='/subjects' component={subjects}/>
-          <Route exact path='/Dropdown' component={Dropdown}/>
-          <Route exact path='/getorPost' component={getorPost}/>
-          <Route exact path='/postd' component={postd}/>
-          <Route exact path='/get' component={get}/>
-          <Route exact path='/verify' component={verify}/>
-          <Route exact path='/verified' component={verified}/>
-          
-
+          </switch>
           
           
 

@@ -46,7 +46,7 @@ class Dropdown extends Component {
       
     return (
       <center>
-        <NavigationBar history={this.props.history}/>
+        <NavigationBar/>
       <Container>
        <Row>
        <Col lg={12} style={marginTop}>
@@ -68,7 +68,7 @@ class Dropdown extends Component {
             <option     className="FormField__Label" value="2020">2020</option>
           </select>
         </label>
-        <input  className="FormField__Button mr-20" type="submit" value="Submit" onChange={this.handleChange} />
+        <input  className="FormField__Button mr-20" type="submit" value="Submit"/>
         </div>
       </form>
       </div>

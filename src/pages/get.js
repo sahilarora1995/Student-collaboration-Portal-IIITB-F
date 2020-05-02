@@ -3,6 +3,7 @@ import React,{Component} from 'react';
 import  {Navbar,Nav,Container,Row,Jumbotron,Col,Table,Image,Button,Figure,Card} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
+import NavigationBar from '../components/NavigationBar'
   
 class get extends Component { 
 
@@ -17,13 +18,27 @@ class get extends Component {
   // everytime the state changes, render is called again. Therefore, we should not try changing state from render
 
   async componentDidMount(){
-    
-    await axios.get('/getData',
-      {params: {subject: 0,
-      year: 0,
-      resourceType: null,
-      semester: 0}
-    }).
+
+    var params={};
+    var subject=JSON.parse(localStorage.getItem('id'));
+    var year=JSON.parse(localStorage.getItem('year'));
+    var resourcetype=JSON.parse(localStorage.getItem('resourcetype'));
+    var sem=JSON.parse(localStorage.getItem('sem'));
+
+    if(subject && subject.length)
+      params.subject=subject;
+    if(year && year.length)
+      params.year=year;
+    if(resourcetype && resourcetype.length)
+      params.resourceType=resourcetype;
+    if(sem && sem.length)
+      params.semester=sem;
+
+    //console.log(params);
+
+    await axios.get('/getData/',
+      {params}
+    ).
     then(Response =>{
       this.setState({images:Response.data});
     }).
@@ -82,7 +97,7 @@ class get extends Component {
           <div>
             <Jumbotron>
               <center>
-
+                
               {image1}
 
               </center>
@@ -102,17 +117,17 @@ class get extends Component {
 
       return ( 
         <center>
-      <Container>
-       <Row>
-       <Col lg={12} style={marginTop}>
-         <div>
-          {this.fileData()}
-         
-          </div>
-      </Col>
-      </Row>
-      </Container>
-      </center>
+          <NavigationBar/>
+            <Container>
+              <Row>
+                <Col lg={12} style={marginTop}>
+                  <div>
+                    {this.fileData()}
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+        </center>
       ); 
     } 
   } 

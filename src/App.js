@@ -10,6 +10,13 @@ import postd from './pages/postd';
 import get from './pages/get';
 import login from './pages/login'
 import verify from './pages/verify'
+import interview from './pages/interview'
+import writeExp from './pages/writeExp'
+import readExperiences from './pages/readExperiences'
+
+import readIntervieworwrite from './pages/readIntervieworwrite'
+
+
 import verified from './pages/verified'
 import register from './pages/register'
 import NavigationBar from './components/NavigationBar'
@@ -41,6 +48,13 @@ class App extends Component {
           <Route exact path='/get' component={get}/>
           <Route exact path='/verify' component={verify}/>
           <Route exact path='/verified' component={verified}/>
+          <Route exact path='/interview' component={interview}/>
+          <Route exact path='/writeExp' component={writeExp}/>
+          <Route exact path='/readIntervieworwrite' component={readIntervieworwrite}/>
+          <Route exact path='/readExperiences' component={readExperiences}/>
+          
+
+          
           
 
           

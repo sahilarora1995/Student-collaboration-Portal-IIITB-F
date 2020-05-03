@@ -4,7 +4,7 @@ import axios from 'axios';
 import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 
-class subjects extends Component {
+class writeExp extends Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -19,9 +19,9 @@ class subjects extends Component {
     
       handleSubmit(event) {
           
-            localStorage.setItem('id',JSON.stringify(this.state.value));
-             
-          this.props.history.push('/Dropdown');
+          localStorage.setItem('interviewExp',JSON.stringify(this.state.value));
+           console.log(JSON.parse(localStorage.getItem('interviewExp')))
+          this.props.history.push('/verify');
         
         event.preventDefault();
       }
@@ -54,16 +54,18 @@ class subjects extends Component {
               
                     
                       </div>
-        
-                      <div className="FormField">
-                  
-                   <input  className="FormField__Button mr-20"  type="submit" value="ALGO"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="MML"  onClick={this.handleChange}/> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="WAN"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="ML" onClick={this.handleChange} />
-    
-              
-                      </div>
+        <div id="wrapper">
+
+	<form id="paper" method="get" action="">
+
+		<div id="margin">Title: <input id="title" type="text" name="title"></input></div>
+		<textarea placeholder="Share your interview experience in Detail..." id="text" rows="6"  styles="overflow: hidden; word-wrap: break-word; resize: none; height: 160px; "></textarea>  
+		<input id="button" type="submit" value="Create"onClick={this.handleChange}></input>
+		
+	</form>
+
+</div>
+
                     </form>
                   </div>
               </Col>
@@ -75,4 +77,4 @@ class subjects extends Component {
     }
 }
 
-export default subjects;
+export default writeExp;

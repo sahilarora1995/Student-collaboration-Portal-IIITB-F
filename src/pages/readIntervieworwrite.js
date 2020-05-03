@@ -4,7 +4,7 @@ import axios from 'axios';
 import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 
-class subjects extends Component {
+class readIntervieworwrite extends Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -18,10 +18,9 @@ class subjects extends Component {
       }
     
       handleSubmit(event) {
-          
-            localStorage.setItem('id',JSON.stringify(this.state.value));
-             
-          this.props.history.push('/Dropdown');
+            console.log(event.target.id)
+            localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
+          this.props.history.push('/semester');
         
         event.preventDefault();
       }
@@ -50,20 +49,20 @@ class subjects extends Component {
                 <div className="FormCenter" >
                     <form onSubmit={this.handleSubmit} className="FormFields">
                       <div className="FormField">
-                        <label className="FormField__Label" htmlFor="name">WELCOME TO STUDENT COLLOLABORATION PORTAL</label>
-              
+                      <span>DO YOU WANT TO READ OR WRITE AN EXPERIENCE..? </span>
+                                    
                     
                       </div>
-        
-                      <div className="FormField">
-                  
-                   <input  className="FormField__Button mr-20"  type="submit" value="ALGO"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="MML"  onClick={this.handleChange}/> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="WAN"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="ML" onClick={this.handleChange} />
-    
-              
-                      </div>
+        <center>
+                   <div class="select">
+  <select name="slct" id="slct">
+    <option selected disabled>Choose an option</option>
+    <option value="1">READ EXPERIENCES</option>
+    <option value="2">WRITE WRITE EXPERIENCES</option>
+    <option value="3">GO TO HOME PAGE </option>
+  </select>
+</div>
+</center>
                     </form>
                   </div>
               </Col>
@@ -75,4 +74,4 @@ class subjects extends Component {
     }
 }
 
-export default subjects;
+export default readIntervieworwrite;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 
-class subjects extends Component {
+class interview extends Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -19,9 +19,8 @@ class subjects extends Component {
     
       handleSubmit(event) {
           
-            localStorage.setItem('id',JSON.stringify(this.state.value));
-             
-          this.props.history.push('/Dropdown');
+            localStorage.setItem('sem',JSON.stringify(this.state.value));
+          this.props.history.push('/subjects');
         
         event.preventDefault();
       }
@@ -57,11 +56,12 @@ class subjects extends Component {
         
                       <div className="FormField">
                   
-                   <input  className="FormField__Button mr-20"  type="submit" value="ALGO"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="MML"  onClick={this.handleChange}/> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="WAN"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="ML" onClick={this.handleChange} />
-    
+                        <input type="text" className="FormField__Input" placeholder="Enter you name.."  value={this.state.value} onChange={this.handleChange}/>
+                        <input type="text" className="FormField__Input" placeholder="which year you got placed?" name="password"  />                        
+                        <input type="text" className="FormField__Input" placeholder="Which company you atr placed in ?"  value={this.state.value} onChange={this.handleChange}/>
+                        <input type="text" className="FormField__Input" placeholder="which year you graduated ?" name="password"  />                        
+                        <button class="btn" type="submit" onClick={() => this.handleClick()}>Write your Experience Here..</button>
+                   
               
                       </div>
                     </form>
@@ -75,4 +75,4 @@ class subjects extends Component {
     }
 }
 
-export default subjects;
+export default interview;

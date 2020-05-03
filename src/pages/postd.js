@@ -1,5 +1,6 @@
 import React from 'react'
 import axios, { post } from 'axios';
+import NavigationBar from '../components/NavigationBar'
 
 class postd extends React.Component {
 
@@ -42,7 +43,8 @@ class postd extends React.Component {
 
   render() {
     return (
-      
+      <div>
+        <NavigationBar/>
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
         <input class="btn"type="file" onChange={this.onChange} />
@@ -51,6 +53,7 @@ class postd extends React.Component {
 </div>
         <button class="btn" type="submit" onClick={() => this.handleClick()}>Upload</button>
       </form>
+      </div>
    )
   }
 }

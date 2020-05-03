@@ -36,26 +36,29 @@ class App extends Component {
       <Router basename="/react-auth-ui/">
         <NavigationBar/>
         <Col lg={12} style={marginTop}>
-          
-          <Route exact path='/' component={login}/>
-          <Route exact path='/register' component={register}/>
-          <Route exact path='/welcome' component={Welcome}/>
-          <Route exact path='/semester' component={semester}/>
-          <Route exact path='/subjects' component={subjects}/>
-          <Route exact path='/Dropdown' component={Dropdown}/>
-          <Route exact path='/getorPost' component={getorPost}/>
-          <Route exact path='/postd' component={postd}/>
-          <Route exact path='/get' component={get}/>
-          <Route exact path='/verify' component={verify}/>
-          <Route exact path='/verified' component={verified}/>
-          <Route exact path='/interview' component={interview}/>
+          <switch>
+            <Route exact path='/' component={login}/>
+            <Route exact path='/register' component={register}/>
+            <Route exact path='/welcome' component={Welcome}/>
+            <Route exact path='/semester' component={semester}/>
+            <Route exact path='/subjects' component={subjects}/>
+            <Route exact path='/Dropdown' component={Dropdown}/>
+            <Route exact path='/getorPost' component={getorPost}/>
+            <Route exact path='/postd' component={postd}/>
+            <Route exact path='/get' component={get}/>
+            <Route exact path='/verify' component={verify}/>
+            <Route exact path='/verified' component={verified}/>
+             <Route exact path='/interview' component={interview}/>
           <Route exact path='/writeExp' component={writeExp}/>
           <Route exact path='/readIntervieworwrite' component={readIntervieworwrite}/>
           <Route exact path='/readExperiences' component={readExperiences}/>
           
+         
+          
 
           
           
+          </switch>
 
           
           

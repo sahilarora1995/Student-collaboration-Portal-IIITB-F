@@ -56,7 +56,7 @@ class semester extends Component {
         
                       <div className="FormField">
                   
-                       <input  className="FormField__Button mr-20"  type="submit" value="1"  onChange={this.handleChange}/> 
+                    <input  className="FormField__Button mr-20"  type="submit" value="1"  onClick={this.handleChange}/> 
                    <input  className="FormField__Button mr-20"  type="submit" value="2"  onClick={this.handleChange} /> 
                    <input  className="FormField__Button mr-20"  type="submit" value="3"  onClick={this.handleChange} /> 
                    <input  className="FormField__Button mr-20"  type="submit" value="4"  onClick={this.handleChange} />

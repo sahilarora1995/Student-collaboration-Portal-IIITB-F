@@ -32,7 +32,11 @@ class Dropdown extends Component {
             console.log(prod)
             
 
-          this.props.history.push('/getorPost');
+            if (prod.resourceType == 'IMPORTANT VIDEO RESOURCES') {
+              this.props.history.push('/videoPage');
+            } else {
+              this.props.history.push('/getorPost');
+            }
         
         event.preventDefault();
       }

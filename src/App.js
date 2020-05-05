@@ -13,6 +13,7 @@ import verify from './pages/verify'
 import interview from './pages/interview'
 import writeExp from './pages/writeExp'
 import readExperiences from './pages/readExperiences'
+import aboutus from './pages/aboutus'
 
 import readIntervieworwrite from './pages/readIntervieworwrite'
 
@@ -52,6 +53,7 @@ class App extends Component {
           <Route exact path='/writeExp' component={writeExp}/>
           <Route exact path='/readIntervieworwrite' component={readIntervieworwrite}/>
           <Route exact path='/readExperiences' component={readExperiences}/>
+          <Route exact path='/aboutus' component={aboutus}/>
           
          
           

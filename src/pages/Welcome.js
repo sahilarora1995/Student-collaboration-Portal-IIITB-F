@@ -1,28 +1,12 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
-import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
+import { Redirect } from 'react-router-dom';
+import  {Card,Container,Row,Jumbotron,Col, Button} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 
 class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleChange(event)
-  {
-        this.setState({value: event.target.value});
-  }
-    
-  handleSubmit(event) {
-    console.log(event.target.id)
-    localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
-    this.props.history.push('/semester');
-        
-    event.preventDefault();
   }
 
   render() {
@@ -40,12 +24,12 @@ class Welcome extends Component {
           <div>  
      <header>
 <nav class="nav npc">
-    <a href="#" class="nav-item" active-color="orange">Home</a>
-    <a href="#" class="nav-item" active-color="green">PYQ</a>
-    <a href="#" class="nav-item" active-color="blue">INTERVIEWS EXPERIENCES</a>
-    <a href="#" class="nav-item" active-color="red">VIDEOS</a>
+    <a href="http://localhost:3000/welcome/" class="nav-item" active-color="orange">Home</a>
+    <a href="http://localhost:3000/semester/" class="nav-item" active-color="green">PYQ</a>
+    <a href="http://localhost:3000/readIntervieworwrite/" class="nav-item" active-color="blue">INTERVIEWS EXPERIENCES</a>
+    <a href="http://localhost:3000/semester/" class="nav-item" active-color="red">VIDEOS</a>
     <a href="#" class="nav-item" active-color="rebeccapurple">MOCK INTERVIEWS</a>
-    <a href="#" class="nav-item" active-color="rebeccapurple">ABOUT US</a>
+    <a href="http://localhost:3000/aboutus/" class="nav-item" active-color="rebeccapurple">ABOUT US</a>
     <span class="nav-indicator"></span>
   </nav>
 
@@ -68,12 +52,12 @@ class Welcome extends Component {
   <div class="nav nmb">
     <div class="nav__content">
         <ul class="nav__list">
-            <li class="nav__list-item"><a href="#" class="hover-target">Home</a></li>
-            <li class="nav__list-item"><a href="#" class="hover-target">PYQ</a></li>
-            <li class="nav__list-item"><a href="#" class="hover-target">VIDEOS</a></li>
-            <li class="nav__list-item"><a href="#" class="hover-target">INTERVIEWS EXPERIENCES</a></li>
+            <li class="nav__list-item"><a href="http://localhost:3000/welcome/" class="hover-target">Home</a></li>
+            <li class="nav__list-item"><a href="http://localhost:3000/semester/" class="hover-target">PYQ</a></li>
+            <li class="nav__list-item"><a href="http://localhost:3000/semester/" class="hover-target">VIDEOS</a></li>
+            <li class="nav__list-item"><a href="http://localhost:3000/readIntervieworwrite" class="hover-target">INTERVIEWS EXPERIENCES</a></li>
             <li class="nav__list-item"><a href="#" class="hover-target">MOCK INTERVIEWS</a></li>
-            <li class="nav__list-item"><a href="#" class="hover-target">ABOUT US</a></li>
+            <li class="nav__list-item"><a href="http://localhost:3000/aboutus" class="hover-target">ABOUT US</a></li>
             
         </ul>
     </div>

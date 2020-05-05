@@ -104,9 +104,9 @@ export default class Login extends React.Component {
 			  </Button>
 			    
 			    <br/><br/>
-			    <p> Not a user? {' '}
+			    <span> Not a user? {' '}
 			    		<Button size="sm" variant="secondary" onClick={this.register}>Register</Button>
-			    </p>
+			    </span>
 			</Card.Footer>
 			</Form>
 			</Card>

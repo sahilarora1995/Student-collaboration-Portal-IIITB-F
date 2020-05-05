@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
+import  {Container,Row,Jumbotron,Col} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 
 class Dropdown extends Component {
@@ -18,23 +16,24 @@ class Dropdown extends Component {
       }
     
       handleSubmit(event) {
-       
-      
+
+        event.preventDefault();
             localStorage.setItem('year',JSON.stringify(this.state.value));
             
-
             const prod={
-  subject:JSON.parse(localStorage.getItem('id')),
-  year: JSON.parse(localStorage.getItem('year')),
-  resourceType: JSON.parse(localStorage.getItem('resourcetype')),
-  semester: JSON.parse(localStorage.getItem('sem')),
-};
+                subject:JSON.parse(localStorage.getItem('id')),
+                year: JSON.parse(localStorage.getItem('year')),
+                resourceType: JSON.parse(localStorage.getItem('resourcetype')),
+                semester: JSON.parse(localStorage.getItem('sem')),
+              };
             console.log(prod)
             
-
-          this.props.history.push('/getorPost');
-        
-        event.preventDefault();
+            if (prod.resourceType == 'VideoResources') {
+              this.props.history.push('/videoPage');
+            } else {
+              this.props.history.push('/getorPost');
+            }
+  
       }
 
    render() {
@@ -53,22 +52,25 @@ class Dropdown extends Component {
         <div className="FormCenter" >
       <form onSubmit={this.handleSubmit}>
          <div className="FormField"> 
-        <label>
+        
          <Jumbotron className="bg-dark text-white">
-                <h1> SELECT THE YEAR :</h1>
-                </Jumbotron>
+                
+          <label>Select year</label>
+          <br/>
           
-          <select className="FormField__Buttonp mr-20" value={this.state.value} onClick={this.handleChange}>
-            <option   className="FormField__Label" value="2014">2014</option>
-            <option    className="FormField__Label" value="2015">2015</option>
-            <option     className="FormField__Label" value="2016">2016</option>
-            <option     className="FormField__Label" value="2017">2017</option>
-            <option     className="FormField__Label" value="2018">2018</option>
-            <option     className="FormField__Label" value="2019">2019</option>
-            <option     className="FormField__Label" value="2020">2020</option>
+          <select className="FormField__Buttonp mr-20" value={this.state.value} onChange={this.handleChange}>
+            <option defaultValue>Choose year</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
           </select>
-        </label>
+        {'  '}
         <input  className="FormField__Button mr-20" type="submit" value="Submit"/>
+        </Jumbotron>
         </div>
       </form>
       </div>

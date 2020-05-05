@@ -26,7 +26,6 @@ class getorPost extends Component {
         alignItems:"center"
       }
      
-
         return (
           
           <center>
@@ -34,11 +33,6 @@ class getorPost extends Component {
           <Container >
             <Row>
               <Col lg={12} style={marginTop}>
-                 
-                <Jumbotron className="bg-dark text-white">
-                <h1>WELCOME TO STUDENT COLLOLABORATION PORTAL</h1>
-
-                </Jumbotron>
 
                 <div className="FormCenter" >
                     <form onSubmit={this.handleSubmit} className="FormFields">

@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
+import  {Container,Row,Col,Card,Form,Button} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 
 class readIntervieworwrite extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: 1};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
-        
         this.setState({value: event.target.value});
       }
     
       handleSubmit(event) {
-            console.log(event.target.id)
-            localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
-          this.props.history.push('/semester');
+            console.log(this.state.value);
+
+          if(this.state.value===1)
+            this.props.history.push('/readExperiences');
+          else if(this.state.value===2)
+            this.props.history.push('/writeExp');
         
         event.preventDefault();
       }
@@ -28,48 +28,44 @@ class readIntervieworwrite extends Component {
   
     render() {
       const marginTop={
-        marginTop:"20px",
+        marginTop:"40px",
         alignItems:"center"
       }
      
 
         return (
-          
-          <center>
-            <NavigationBar history={this.props.history}/>
-          <Container >
-            <Row>
+                <center>
+                <NavigationBar/>
+              <Container>
+              <Row>
               <Col lg={12} style={marginTop}>
-                 
-                <Jumbotron className="bg-dark text-white">
-                <h1>WELCOME TO STUDENT COLLOLABORATION PORTAL</h1>
-
-                </Jumbotron>
-
-                <div className="FormCenter" >
-                    <form onSubmit={this.handleSubmit} className="FormFields">
-                      <div className="FormField">
-                      <span>DO YOU WANT TO READ OR WRITE AN EXPERIENCE..? </span>
-                                    
-                    
-                      </div>
-        <center>
-                   <div class="select">
-  <select name="slct" id="slct">
-    <option selected disabled>Choose an option</option>
-    <option value="1">READ EXPERIENCES</option>
-    <option value="2">WRITE WRITE EXPERIENCES</option>
-    <option value="3">GO TO HOME PAGE </option>
-  </select>
-</div>
-</center>
-                    </form>
-                  </div>
-              </Col>
-            </Row>
-          </Container>
-          </center>
-
+                <div>
+                  <Card className={"border border-dark bg-dark text-white"}>
+                    <Form id="FormId" onSubmit={this.handleSubmit}>
+                    <Card.Body>
+                    <span>DO YOU WANT TO READ OR WRITE AN EXPERIENCE..? </span>
+                        <Form.Row>
+                          <Form.Group as={Col} controlId="formGrid">
+                            <Form.Label></Form.Label>
+                                        <Form.Control as="select" value={this.state.value} onChange={this.handleChange}>
+                                          
+                                          <option value="1">READ EXPERIENCES</option>
+                                          <option value="2">WRITE EXPERIENCES</option>
+                                        </Form.Control>
+                                  </Form.Group>
+                        </Form.Row>
+                    </Card.Body>
+                    <Card.Footer style={{"textAlign":"right"}}>
+                    <Button size="sm" variant="success" type="submit">Submit</Button>
+                    </Card.Footer>
+                    </Form>
+                  </Card>
+                  
+                </div>
+                </Col>
+                </Row>
+                </Container>
+                </center>
         );
     }
 }

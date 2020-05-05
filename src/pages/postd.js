@@ -18,11 +18,16 @@ class postd extends React.Component {
     this.fileUpload(this.state.file).then((response)=>{
       console.log(response.data);
     })
+
+    this.props.history.push('/verify');
   }
+
   onChange(e) {
     this.setState({file:e.target.files[0]})
   }
-   handleClick() { this.props.history.push('/verify');  } 
+
+//   handleClick() {   } 
+
   fileUpload(file){
     const url = 'http://localhost:8000/postData/';
     const formData = new FormData();
@@ -47,11 +52,11 @@ class postd extends React.Component {
         <NavigationBar/>
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
-        <input class="btn"type="file" onChange={this.onChange} />
-        <div class="upload-btn-wrapper">
+        <input className="btn"type="file" required onChange={this.onChange} />
+        <div className="upload-btn-wrapper">
  
-</div>
-        <button class="btn" type="submit" onClick={() => this.handleClick()}>Upload</button>
+    </div>
+        <button class="btn" type="submit">Upload</button>
       </form>
       </div>
    )

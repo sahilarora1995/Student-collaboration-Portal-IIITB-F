@@ -10,10 +10,19 @@ import postd from './pages/postd';
 import get from './pages/get';
 import login from './pages/login'
 import verify from './pages/verify'
+import writeExp from './pages/writeExp'
+import readExperiences from './pages/readExperiences'
+import aboutus from './pages/aboutus'
+import readOneExp from './pages/readOneExp'
+import readIntervieworwrite from './pages/readIntervieworwrite'
 import verified from './pages/verified'
 import register from './pages/register'
+import videoPage from './pages/videoPage'
+import playVideo from './pages/playVideo'
+import addVideo from './pages/addVideo'
+
 import NavigationBar from './components/NavigationBar'
-import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
+import  {Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from "./components/Home";
@@ -31,6 +40,7 @@ class App extends Component {
       <Router basename="/react-auth-ui/">
         <NavigationBar/>
         <Col lg={12} style={marginTop}>
+<<<<<<< HEAD
           
           <Route exact path='/' component={login}/>
           <Route exact path='/register' component={register}/>
@@ -49,6 +59,30 @@ class App extends Component {
           
           
 
+=======
+          <switch>
+            
+            <Route exact path='/' component={login} />
+            <Route exact path='/register' component={register} />
+            <Route exact path='/welcome' component={Welcome} />
+            <Route exact path='/semester' component={semester} />
+            <Route exact path='/subjects' component={subjects} />
+            <Route exact path='/Dropdown' component={Dropdown} />
+            <Route exact path='/getorPost' component={getorPost} />
+            <Route exact path='/postd' component={postd} />
+            <Route exact path='/get' component={get} />
+            <Route exact path='/verify' component={verify} />
+            <Route exact path='/verified' component={verified} />
+            <Route exact path='/writeExp' component={writeExp} />
+            <Route exact path='/readIntervieworwrite' component={readIntervieworwrite} />
+            <Route exact path='/readExperiences' component={readExperiences} />
+            <Route exact path='/readOneExp/:id' component={readOneExp}/>
+            <Route exact path='/videoPage' component={videoPage}/>
+            <Route exact path='/playVideo' component={playVideo}/>
+            <Route exact path='/addVideo' component={addVideo}/>
+            <Route exact path='/aboutus' component={aboutus}/>
+          </switch>
+>>>>>>> c599f8def127873a431fd13e1cfbef7ca2dd12bb
         </Col>
       </Router>
     )

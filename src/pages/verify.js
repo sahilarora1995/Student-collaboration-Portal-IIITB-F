@@ -18,22 +18,8 @@ class verify extends Component {
       }
     
       handleSubmit(event) {
-       
-      
-            localStorage.setItem('year',JSON.stringify(this.state.value));
-            
 
-            const prod={
-  subject:JSON.parse(localStorage.getItem('id')),
-  year: JSON.parse(localStorage.getItem('year')),
-  resourceType: JSON.parse(localStorage.getItem('resourcetype')),
-  semester: JSON.parse(localStorage.getItem('sem')),
-};
-            console.log(prod)
-            
-
-          this.props.history.push('/getorPost');
-        
+          this.props.history.push('/getorPost');       
         event.preventDefault();
       }
        state = {
@@ -41,7 +27,7 @@ class verify extends Component {
   }
 
  
-
+ 
    render() {
       const marginTop={
         marginTop:"20px",

@@ -42,21 +42,16 @@ class semester extends Component {
               <Col lg={12} style={marginTop}>
                  
                 <Jumbotron className="bg-dark text-white">
-                <h1>WELCOME TO STUDENT COLLOLABORATION PORTAL</h1>
+                <h1>WELCOME TO STUDENT COLLABORATION PORTAL</h1>
 
                 </Jumbotron>
 
                 <div className="FormCenter" >
                     <form onSubmit={this.handleSubmit} className="FormFields">
-                      <div className="FormField">
-                        <label className="FormField__Label" htmlFor="name">WELCOME TO STUDENT COLLOLABORATION PORTAL</label>
-              
-                    
-                      </div>
         
                       <div className="FormField">
                   
-                       <input  className="FormField__Button mr-20"  type="submit" value="1"  onChange={this.handleChange}/> 
+                    <input  className="FormField__Button mr-20"  type="submit" value="1"  onClick={this.handleChange}/> 
                    <input  className="FormField__Button mr-20"  type="submit" value="2"  onClick={this.handleChange} /> 
                    <input  className="FormField__Button mr-20"  type="submit" value="3"  onClick={this.handleChange} /> 
                    <input  className="FormField__Button mr-20"  type="submit" value="4"  onClick={this.handleChange} />

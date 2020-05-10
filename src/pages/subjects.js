@@ -20,6 +20,7 @@ class subjects extends Component {
       handleSubmit(event) {
           
             localStorage.setItem('id',JSON.stringify(this.state.value));
+             
           this.props.history.push('/Dropdown');
         
         event.preventDefault();
@@ -42,18 +43,12 @@ class subjects extends Component {
               <Col lg={12} style={marginTop}>
                  
                 <Jumbotron className="bg-dark text-white">
-                <h1>WELCOME TO STUDENT COLLOLABORATION PORTAL</h1>
+                <h1>WELCOME TO STUDENT COLLABORATION PORTAL</h1>
 
                 </Jumbotron>
 
                 <div className="FormCenter" >
                     <form onSubmit={this.handleSubmit} className="FormFields">
-                      <div className="FormField">
-                        <label className="FormField__Label" htmlFor="name">WELCOME TO STUDENT COLLOLABORATION PORTAL</label>
-              
-                    
-                      </div>
-        
                       <div className="FormField">
                   
                    <input  className="FormField__Button mr-20"  type="submit" value="ALGO"  onClick={this.handleChange} /> 

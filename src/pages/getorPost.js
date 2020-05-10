@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
+import NavigationBar from '../components/NavigationBar'
 
 class getorPost extends Component {
   
@@ -25,18 +26,13 @@ class getorPost extends Component {
         alignItems:"center"
       }
      
-
         return (
           
           <center>
+            <NavigationBar/>
           <Container >
             <Row>
               <Col lg={12} style={marginTop}>
-                 
-                <Jumbotron className="bg-dark text-white">
-                <h1>WELCOME TO STUDENT COLLOLABORATION PORTAL</h1>
-
-                </Jumbotron>
 
                 <div className="FormCenter" >
                     <form onSubmit={this.handleSubmit} className="FormFields">

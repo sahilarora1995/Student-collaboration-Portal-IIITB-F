@@ -9,7 +9,7 @@ class NavigationBar extends React.Component{
 		    this.state = {value: true};
 
 		    this.logout = this.logout.bind(this);
-		  }
+      }
 
     // redirecting to Login on clicking Logout
     logout=(event)=>{
@@ -19,27 +19,34 @@ class NavigationBar extends React.Component{
       localStorage.clear();
       this.setState({value:false});
       window.location.reload();
+
       
     }
   render(){
     // Login page
     if(localStorage.getItem('loggedin')==="false"||localStorage.getItem('loggedin')==="")
+    }
+  render(){
+    // Login page
+    if(localStorage.getItem('loggedin')&&(localStorage.getItem('loggedin')==="false"||localStorage.getItem('loggedin')===""))
+ c599f8def127873a431fd13e1cfbef7ca2dd12bb
     {
       return(
         <Navbar bg="dark" variant="dark" fixed="top">
-            <Navbar.Brand href="/" >STUDENT COLLOBORATION PORTAL</Navbar.Brand>
-            <Nav pullRight className="ml-auto">
-          </Nav>
+            <Navbar.Brand href="/" >STUDENT COLLABORATION PORTAL</Navbar.Brand>
         </Navbar>);
     }
     else
     { // other pages on login will get Logout button
       return(
         <Navbar bg="dark" variant="dark" fixed="top">
-            <Navbar.Brand href="/" >STUDENT COLLOBORATION PORTAL</Navbar.Brand>
-            <Nav pullRight className="ml-auto">
+            <Navbar.Brand href="/welcome" >STUDENT COLLABORATION PORTAL</Navbar.Brand>
+          <Nav pullright="true" className="ml-auto">
+          <Button size="sm" variant="secondary" onClick={this.logout}><Link to="/">Logout</Link></Button>
           </Nav>
+
           <Button className="ml-auto" size="sm" variant="secondary" onClick={this.logout}><Link to="/">Logout</Link></Button>
+
           
         </Navbar>);
     }

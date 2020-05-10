@@ -122,9 +122,9 @@ export default class Register extends React.Component {
 			    <FontAwesomeIcon icon={faUndo}/> Reset
 			  </Button>
 			    <br/><br/>
-			    <p> Already a user?{' '}
+			    <span> Already a user?{' '}
 			    		<Button size="sm" variant="secondary" onClick={this.login}>Login</Button>
-			    </p>
+			    </span>
 			</Card.Footer>
 			</Form>
 			</Card>

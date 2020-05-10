@@ -5,11 +5,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
 import NavigationBar from '../components/NavigationBar'
   
-class get extends Component { 
+class readExperiences extends Component { 
 
     constructor(props){
       super(props);
-      this.state = {images:[],vote:false};
+      this.state = {exp:[]};
       this.patch=this.patch.bind(this);
   }
   
@@ -19,41 +19,21 @@ class get extends Component {
 
   async componentDidMount(){
 
-    var params={};
-    var subject=JSON.parse(localStorage.getItem('id'));
-    var year=JSON.parse(localStorage.getItem('year'));
-    var resourcetype=JSON.parse(localStorage.getItem('resourcetype'));
-    var sem=JSON.parse(localStorage.getItem('sem'));
-
-    if(subject && subject.length)
-      params.subject=subject;
-    if(year && year.length)
-      params.year=year;
-    if(resourcetype && resourcetype.length)
-      params.resourceType=resourcetype;
-    if(sem && sem.length)
-      params.semester=sem;
-
-    //console.log(params);
-
-    await axios.get('/getData/',
-      {params}
-    ).
+    await axios.get('/interviewData/').
     then(Response =>{
-      this.setState({images:Response.data});
+      this.setState({exp:Response.data});
     }).
     catch(error => {
       console.log("error getting");
     })
   }
-
+  
   patch = (id,data) => {
-    let url="/patchData/"+id+"/";
+    let url="/interviewData/"+id+"/";
     axios.patch(url,data,{headers:{'Content-Type':'application/json'}} ).then(Response => {console.log(Response)}).
     catch(e => console.log("error"))
     window.location.reload();
   }
-
   upvote = (id,num) => {
     const data={
       numberofUpvotes: num,
@@ -61,47 +41,36 @@ class get extends Component {
     this.patch(id,data);
   };
 
-  downvote = (id,num) => {
-    const data={
-      numberofDownvotes: num,
-    }
-    this.patch(id,data);
-  };
-
   // function to return the display html to render
     fileData = () => { 
 
-      if(this.state.images)
+      if(this.state.exp)
       {
-        const image1 = this.state.images.map((e) =>
+        const exps = this.state.exp.map((e) =>
           (<div key={e.id}>
-              <Card className="text-center">
-                <Card.Header>
-                  <Card.Link href="#">{e.resourceType}  {e.subject}  {e.year}  {e.semester}</Card.Link>
+              <Card className={"border border-dark bg-white text-dark text-left"}>
+                <Card.Header as="h5">Title: 
+                  <Card.Link href={"/readOneExp/"+e.id}>{e.title}</Card.Link>
                 </Card.Header>
-                <Card.Body>
-                  <Figure.Image width={400} height={400} src={e.file}/>
+                <Card.Body className="text-black">
+                  <Row>
+                    <Col>Author: {e.name}</Col>
+                    <Col className="text-right">
+                      <Button className="btn pull-right" variant="light" size="sm" onClick={() => this.upvote(e.id,e.numberofUpvotes+1)}>
+                      <FontAwesomeIcon icon={faThumbsUp}/>{' '}{e.numberofUpvotes}</Button>
+                    </Col>
+                  </Row>
                 </Card.Body>
-                <Card.Footer className="text-muted">
-                  <Button variant="outline-secondary"  onClick={() => this.upvote(e.id,e.numberofUpvotes+1)} size="sm">
-                  <FontAwesomeIcon icon={faThumbsUp}/>{' '}{e.numberofUpvotes}</Button>{' '}
-                  {' '}
-                  <Button variant="outline-secondary" onClick={() => this.downvote(e.id,e.numberofDownvotes+1)} size="sm">
-                  <FontAwesomeIcon icon={faThumbsDown}/>{' '}{e.numberofDownvotes}</Button>
-                </Card.Footer>
               </Card>
               <br/>
           </div>));
 
        return(
           <div>
-            <Jumbotron>
-              <center>
+            <h1 className="text-white">Experiences</h1>
                 
-              {image1}
+              {exps}
 
-              </center>
-            </Jumbotron>
           </div>
         );
       }
@@ -132,4 +101,4 @@ class get extends Component {
     } 
   } 
   
-  export default get; 
+  export default readExperiences; 

@@ -64,8 +64,9 @@ export default class Login extends React.Component {
 	}
 	render() {
 		const {id, password} = this.state;
-		
+		localStorage.setItem("loggedin",false);
 		return(
+			
 		<div>
 			<Card className={"border border-dark bg-dark text-white"}>
 			<Card.Header> Login </Card.Header>
@@ -103,9 +104,9 @@ export default class Login extends React.Component {
 			  </Button>
 			    
 			    <br/><br/>
-			    <p> Not a user? {' '}
+			    <span> Not a user? {' '}
 			    		<Button size="sm" variant="secondary" onClick={this.register}>Register</Button>
-			    </p>
+			    </span>
 			</Card.Footer>
 			</Form>
 			</Card>

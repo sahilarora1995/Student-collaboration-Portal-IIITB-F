@@ -17,9 +17,9 @@ class readIntervieworwrite extends Component {
       handleSubmit(event) {
             console.log(this.state.value);
 
-          if(this.state.value===1)
+          if(this.state.value==1)
             this.props.history.push('/readExperiences');
-          else if(this.state.value===2)
+          else if(this.state.value==2)
             this.props.history.push('/writeExp');
         
         event.preventDefault();

@@ -16,7 +16,7 @@ import NavigationBar from './components/NavigationBar'
 import  {Navbar,Nav,Container,Row,Jumbotron,Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
+import Home from "./components/Home";
 class App extends Component {
   render() {
 
@@ -26,6 +26,8 @@ class App extends Component {
     }
 
     return (
+        
+      
       <Router basename="/react-auth-ui/">
         <NavigationBar/>
         <Col lg={12} style={marginTop}>
@@ -41,6 +43,7 @@ class App extends Component {
           <Route exact path='/get' component={get}/>
           <Route exact path='/verify' component={verify}/>
           <Route exact path='/verified' component={verified}/>
+          <Route exact path='/mockSchedule' component={Home}/>
           
 
           

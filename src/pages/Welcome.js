@@ -19,8 +19,12 @@ class Welcome extends Component {
     
       handleSubmit(event) {
             console.log(event.target.id)
+            //alert('An essay was submitted: ' + this.state.value);
             localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
-          this.props.history.push('/semester');
+            if (this.state.value == "MOCK INTERVIEW")
+              this.props.history.push('/mockSchedule');
+            else
+             this.props.history.push('/semester');
         
         event.preventDefault();
       }
@@ -57,7 +61,7 @@ class Welcome extends Component {
                       <div className="FormField">
                   
                    <input  className="FormField__Button mr-20"  type="submit" value="PREVIOUS YEAR QUESTIONS"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="BLOGS BY SENIORS"  onClick={this.handleChange}/> 
+                   <input  className="FormField__Button mr-20"  type="submit" value="MOCK INTERVIEW"  onClick={this.handleChange}/> 
                    <input  className="FormField__Button mr-20"  type="submit" value="TIPS BY SENIORS"  onClick={this.handleChange} /> 
                    <input  className="FormField__Button mr-20"  type="submit" value="IMPORTANT VIDEO RESOURCES" onClick={this.handleChange} />
     

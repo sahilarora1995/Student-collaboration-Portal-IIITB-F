@@ -4,10 +4,9 @@ import { BrowserRouter as Router, Route} from 'react-router-dom'
 import Welcome from './pages/Welcome'
 import subjects from './pages/subjects'
 import semester from './pages/semester'
+import pyq from './pages/pyq'
+import readOnePYQ from './pages/readOnePYQ'
 import Dropdown from './pages/Dropdown'
-import getorPost from './pages/getorPost'
-import postd from './pages/postd';
-import get from './pages/get';
 import login from './pages/login'
 import verify from './pages/verify'
 import writeExp from './pages/writeExp'
@@ -21,8 +20,7 @@ import videoPage from './pages/videoPage'
 import playVideo from './pages/playVideo'
 import addVideo from './pages/addVideo'
 
-import NavigationBar from './components/NavigationBar'
-import  {Col} from 'react-bootstrap'
+import  {Col,Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from "./components/Home";
@@ -38,41 +36,23 @@ class App extends Component {
         
       
       <Router basename="/react-auth-ui/">
-        <NavigationBar/>
+        
+        
         <Col lg={12} style={marginTop}>
-<<<<<<< HEAD
+          <Container>
+            <Route exact path='/' component={login}/>
+            <Route exact path='/register' component={register}/>
+            <Route exact path='/semester' component={semester}/>
+            <Route exact path='/pyq' component={pyq}/>
+            <Route exact path='/readOnePYQ/:id' component={readOnePYQ}/>
+          </Container>
           
-          <Route exact path='/' component={login}/>
-          <Route exact path='/register' component={register}/>
           <Route exact path='/welcome' component={Welcome}/>
-          <Route exact path='/semester' component={semester}/>
           <Route exact path='/subjects' component={subjects}/>
           <Route exact path='/Dropdown' component={Dropdown}/>
-          <Route exact path='/getorPost' component={getorPost}/>
-          <Route exact path='/postd' component={postd}/>
-          <Route exact path='/get' component={get}/>
           <Route exact path='/verify' component={verify}/>
           <Route exact path='/verified' component={verified}/>
           <Route exact path='/mockSchedule' component={Home}/>
-          
-
-          
-          
-
-=======
-          <switch>
-            
-            <Route exact path='/' component={login} />
-            <Route exact path='/register' component={register} />
-            <Route exact path='/welcome' component={Welcome} />
-            <Route exact path='/semester' component={semester} />
-            <Route exact path='/subjects' component={subjects} />
-            <Route exact path='/Dropdown' component={Dropdown} />
-            <Route exact path='/getorPost' component={getorPost} />
-            <Route exact path='/postd' component={postd} />
-            <Route exact path='/get' component={get} />
-            <Route exact path='/verify' component={verify} />
-            <Route exact path='/verified' component={verified} />
             <Route exact path='/writeExp' component={writeExp} />
             <Route exact path='/readIntervieworwrite' component={readIntervieworwrite} />
             <Route exact path='/readExperiences' component={readExperiences} />
@@ -81,9 +61,8 @@ class App extends Component {
             <Route exact path='/playVideo' component={playVideo}/>
             <Route exact path='/addVideo' component={addVideo}/>
             <Route exact path='/aboutus' component={aboutus}/>
-          </switch>
->>>>>>> c599f8def127873a431fd13e1cfbef7ca2dd12bb
         </Col>
+        
       </Router>
     )
   }

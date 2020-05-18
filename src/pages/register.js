@@ -25,35 +25,31 @@ export default class Register extends React.Component {
 		event.preventDefault();
 		
 		const user = {
-			id: this.state.id,
-			name:this.state.name,
-			mail: this.state.mail,
+			rollNumber: this.state.id,
+			username:this.state.name,
+			EmailId: this.state.mail,
 			password: this.state.password
         }
         console.log(user);
-        
-        this.props.history.push('/');
-		
-		// enable the below lines after backend setup
-        /*
-        axios.get("http://localhost:8001/rest/users/"+user.id).
-		then(response => {
-			if(response.data.id===user.id)
+
+        axios.get("/loginData/"+user.rollNumber)
+		.then(response => {
+			if(response.data.rollNumber===user.rollNumber)
 			{
 				alert("Sorry, User Id already exists");
 				this.reset();
 				return this.props.history.push('/register');
 			}
-		}).
-		catch(error=>{
+		})
+		.catch(error=>{
 		
-		axios.post("http://localhost:8001/rest/users", user).
-		then(response => {
+		axios.post("/loginData/", user)
+		.then(response => {
 				this.props.history.push('/');
-		}).
-		catch(error => alert("please enter valid inputs"));
+		})
+		.catch(error => alert("please enter valid inputs"));
         });
-        */
+        
 	}
 	
 	reset = () => {
@@ -68,7 +64,8 @@ export default class Register extends React.Component {
 		return(
 		<div>
 			<Card className={"border border-dark bg-dark text-white"}>
-			<Card.Header> Register </Card.Header>
+			<Card.Header> <h3>STUDENT COLLABORATION PORTAL</h3><br/>
+				Register </Card.Header>
 			
 			<Form id="FormId" onSubmit={this.onSubmit} onReset={this.reset}>
 			<Card.Body>

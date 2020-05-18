@@ -8,25 +8,6 @@ class Welcome extends Component {
     super(props);
     this.state = {value: ''};
   }
-<<<<<<< HEAD
-  handleChange(event) {
-        
-        this.setState({value: event.target.value});
-      }
-    
-      handleSubmit(event) {
-            console.log(event.target.id)
-            //alert('An essay was submitted: ' + this.state.value);
-            localStorage.setItem('resourcetype',JSON.stringify(this.state.value));
-            if (this.state.value == "MOCK INTERVIEW")
-              this.props.history.push('/mockSchedule');
-            else
-             this.props.history.push('/semester');
-        
-        event.preventDefault();
-      }
-=======
->>>>>>> c599f8def127873a431fd13e1cfbef7ca2dd12bb
 
   render() {
     if(localStorage.getItem('loggedin')==='false')
@@ -40,34 +21,19 @@ class Welcome extends Component {
       }
         return (
 
-          <div>  
+      <div>  
+        <NavigationBar/>
      <header>
 <nav class="nav npc">
     <a href="http://localhost:3000/welcome/" class="nav-item" active-color="orange">Home</a>
-    <a href="http://localhost:3000/semester/" class="nav-item" active-color="green">PYQ</a>
+    <a href="http://localhost:3000/pyq/" class="nav-item" active-color="green">PYQ</a>
     <a href="http://localhost:3000/readIntervieworwrite/" class="nav-item" active-color="blue">INTERVIEWS EXPERIENCES</a>
     <a href="http://localhost:3000/semester/" class="nav-item" active-color="red">VIDEOS</a>
-    <a href="#" class="nav-item" active-color="rebeccapurple">MOCK INTERVIEWS</a>
+    <a href="http://localhost:3000/mockSchedule/" class="nav-item" active-color="rebeccapurple">MOCK INTERVIEWS</a>
     <a href="http://localhost:3000/aboutus/" class="nav-item" active-color="rebeccapurple">ABOUT US</a>
     <span class="nav-indicator"></span>
   </nav>
 
-<<<<<<< HEAD
-                <div className="FormCenter" >
-                    <form onSubmit={this.handleSubmit} className="FormFields">
-                      <div className="FormField">
-                      <span>WELCOME TO STUDENT COLLOLABORATION PORTAL </span>
-                                    
-                    
-                      </div>
-        
-                      <div className="FormField">
-                  
-                   <input  className="FormField__Button mr-20"  type="submit" value="PREVIOUS YEAR QUESTIONS"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="MOCK INTERVIEW"  onClick={this.handleChange}/> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="TIPS BY SENIORS"  onClick={this.handleChange} /> 
-                   <input  className="FormField__Button mr-20"  type="submit" value="IMPORTANT VIDEO RESOURCES" onClick={this.handleChange} />
-=======
   
   <header class="cd-header">
     <div class="header-wrapper">
@@ -88,20 +54,17 @@ class Welcome extends Component {
     <div class="nav__content">
         <ul class="nav__list">
             <li class="nav__list-item"><a href="http://localhost:3000/welcome/" class="hover-target">Home</a></li>
-            <li class="nav__list-item"><a href="http://localhost:3000/semester/" class="hover-target">PYQ</a></li>
+            <li class="nav__list-item"><a href="http://localhost:3000/pyq/" class="hover-target">PYQ</a></li>
             <li class="nav__list-item"><a href="http://localhost:3000/semester/" class="hover-target">VIDEOS</a></li>
             <li class="nav__list-item"><a href="http://localhost:3000/readIntervieworwrite" class="hover-target">INTERVIEWS EXPERIENCES</a></li>
-            <li class="nav__list-item"><a href="#" class="hover-target">MOCK INTERVIEWS</a></li>
+            <li class="nav__list-item"><a href="http://localhost:3000/mockSchedule/" class="hover-target">MOCK INTERVIEWS</a></li>
             <li class="nav__list-item"><a href="http://localhost:3000/aboutus" class="hover-target">ABOUT US</a></li>
             
         </ul>
     </div>
->>>>>>> c599f8def127873a431fd13e1cfbef7ca2dd12bb
     
 </div>	
 </header>
-
-
 
 <div class="sp-container">
 	<div class="sp-content">

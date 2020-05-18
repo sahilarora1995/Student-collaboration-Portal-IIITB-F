@@ -1,8 +1,8 @@
 import axios from 'axios'; 
 import React,{Component} from 'react'; 
-import  {Navbar,Nav,Container,Row,Jumbotron,Col,Table,Image,Button,Figure,Card} from 'react-bootstrap'
+import  {Container,Row,Col,Button,Card, CardDeck, CardColumns} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
+import {faThumbsUp} from '@fortawesome/free-solid-svg-icons';
 import NavigationBar from '../components/NavigationBar'
   
 class readExperiences extends Component { 
@@ -19,19 +19,19 @@ class readExperiences extends Component {
 
   async componentDidMount(){
 
-    await axios.get('/interviewData/').
-    then(Response =>{
+    await axios.get('/interviewData/')
+    .then(Response =>{
       this.setState({exp:Response.data});
-    }).
-    catch(error => {
+    })
+    .catch(error => {
       console.log("error getting");
     })
   }
   
   patch = (id,data) => {
     let url="/interviewData/"+id+"/";
-    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} ).then(Response => {console.log(Response)}).
-    catch(e => console.log("error"))
+    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} ).then(Response => {console.log(Response)})
+    .catch(e => console.log("error"))
     window.location.reload();
   }
   upvote = (id,num) => {
@@ -68,9 +68,10 @@ class readExperiences extends Component {
        return(
           <div>
             <h1 className="text-white">Experiences</h1>
+            <CardColumns>
                 
               {exps}
-
+            </CardColumns>
           </div>
         );
       }

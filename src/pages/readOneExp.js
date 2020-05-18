@@ -9,7 +9,7 @@ class readOneExp extends Component {
 
     constructor(props){
       super(props);
-      this.state = {exp:''};
+      this.state = {exp:new Object()};
       this.patch=this.patch.bind(this);
   }
 
@@ -41,34 +41,41 @@ class readOneExp extends Component {
   // function to return the display html to render
     fileData = () => { 
 
-		const e=this.state.exp;
-        
-		return (
-			<div>
-              <Card className={"border border-dark bg-white text-dark text-left"}>
-                <Card.Header>
-                <Row>
-                    <Col>
-                    <h4><b>Title: {e.title}</b></h4>
-                    <h6>Author: {e.name}</h6>
-                    <h6>Graduation Year: {e.yearPassout}</h6>
-                    <h6>Company: {e.company}</h6>
-                    <h6>Placement Year: {e.yearPlaced}</h6>
-                    
-                    </Col>
-                    <Col className="text-right">
-                        <Button className="btn pull-right" variant="light" size="sm" onClick={() => this.upvote(e.id,e.numberofUpvotes+1)}>
-                        <FontAwesomeIcon icon={faThumbsUp}/>{' '}{e.numberofUpvotes}</Button>
-                    </Col>
-                </Row>
-                </Card.Header>
-                    <Card.Body className="text-black">
-                        {(e.experience)}
-                    </Card.Body>
-                </Card>
-              <br/>
-          </div>
-		);
+      const e=this.state.exp;
+      console.log(e);
+      
+      var experience=String(e.experience);
+      var array=experience.split("\n");
+      console.log(array);
+          
+      return (
+        <div>
+                <Card className={"border border-dark bg-white text-dark text-left"}>
+                  <Card.Header>
+                  <Row>
+                      <Col>
+                      <h4><b>Title: {e.title}</b></h4>
+                      <h6>Author: {e.name}</h6>
+                      <h6>Graduation Year: {e.yearPassout}</h6>
+                      <h6>Company: {e.company}</h6>
+                      <h6>Placement Year: {e.yearPlaced}</h6>
+                      
+                      </Col>
+                      <Col className="text-right">
+                          <Button className="btn pull-right" variant="light" size="sm" onClick={() => this.upvote(e.id,e.numberofUpvotes+1)}>
+                          <FontAwesomeIcon icon={faThumbsUp}/>{' '}{e.numberofUpvotes}</Button>
+                      </Col>
+                  </Row>
+                  </Card.Header>
+                      <Card.Body className="text-black">
+                          {array.map((i,key) => {
+                                return <div key={key}>{i}<br/></div>;
+                            })}
+                      </Card.Body>
+                  </Card>
+                <br/>
+            </div>
+      );
     }
         
     render() { 

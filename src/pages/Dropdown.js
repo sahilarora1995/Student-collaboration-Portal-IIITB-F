@@ -28,12 +28,8 @@ class Dropdown extends Component {
               };
             console.log(prod)
             
-            if (prod.resourceType == 'VideoResources') {
               this.props.history.push('/videoPage');
-            } else {
-              this.props.history.push('/getorPost');
-            }
-  
+          
       }
 
    render() {

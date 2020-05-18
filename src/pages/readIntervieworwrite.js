@@ -40,25 +40,28 @@ class readIntervieworwrite extends Component {
               <Row>
               <Col lg={12} style={marginTop}>
                 <div>
-                  <Card className={"border border-dark bg-dark text-white"}>
-                    <Form id="FormId" onSubmit={this.handleSubmit}>
+                  <Card className={"border border-dark bg-dark text-white text-center"}>
+                    
+                    <Form id="FormId" onSubmit={this.handleSubmit} >
                     <Card.Body>
                     <span>DO YOU WANT TO READ OR WRITE AN EXPERIENCE..? </span>
+                    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>
                         <Form.Row>
                           <Form.Group as={Col} controlId="formGrid">
                             <Form.Label></Form.Label>
-                                        <Form.Control as="select" value={this.state.value} onChange={this.handleChange}>
-                                          
+                                        <Form.Control as="select" value={this.state.value} onChange={this.handleChange} className={"bg-dark text-white"}>
                                           <option value="1">READ EXPERIENCES</option>
                                           <option value="2">WRITE EXPERIENCES</option>
                                         </Form.Control>
-                                  </Form.Group>
+                          </Form.Group>
                         </Form.Row>
+                        </div>
                     </Card.Body>
-                    <Card.Footer style={{"textAlign":"right"}}>
+                    <Card.Footer style={{"textAlign":"center"}}>
                     <Button size="sm" variant="success" type="submit">Submit</Button>
                     </Card.Footer>
                     </Form>
+                    
                   </Card>
                   
                 </div>

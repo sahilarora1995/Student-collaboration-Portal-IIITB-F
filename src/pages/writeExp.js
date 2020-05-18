@@ -96,8 +96,8 @@ class writeExp extends Component {
                         <Form.Row>
                           <Form.Group as={Col} controlId="formGrid">
                               <Form.Label>Your Experience</Form.Label>
-                              <textarea placeholder="Share your interview experience in Detail..." id="text" rows="6"  styles="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;white-space:pre-wrap;" 
-                              name="exp" value={this.state.exp} onChange={this.onChange}></textarea>
+                              <Form.Control as="textarea" placeholder="Share your interview experience in Detail..." id="text" rows="6"  styles="overflow: hidden; word-wrap: break-word; resize: none; height: 160px;white-space:pre-wrap;" 
+                              name="exp" value={this.state.exp} onChange={this.onChange} className={"bg-dark text-white"}></Form.Control>
                           </Form.Group>
                         </Form.Row>
                     </Card.Body>

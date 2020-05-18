@@ -5,8 +5,6 @@ import {Card, Form, Button, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave, faUndo} from '@fortawesome/free-solid-svg-icons';
 
-import {Redirect} from 'react-router';
-
 export default class Login extends React.Component {
 	
 	initialState = {id:'',password:''};
@@ -26,16 +24,14 @@ export default class Login extends React.Component {
 			password:this.state.password,
         }
 		localStorage.setItem('loggedin',true);
-		this.props.history.push('/welcome');
 		
-		// enable the below lines after backend
-        /*
-		axios.get("http://localhost:8001/rest/users/"+user.id).
-		then(response => {
-			if(response.data.id===user.id && response.data.password===user.password)
+		axios.get("/loginData/"+user.id)
+		.then(response => {
+			if(response.data.rollNumber===user.id && response.data.password===user.password)
 			{
 				localStorage.setItem('loggedin',true);
-				this.props.history.push('/home');
+				localStorage.setItem('user',response.data.username);
+				this.props.history.push('/welcome');
 			} 
 			else{
 				alert("please fill valid details");
@@ -44,8 +40,6 @@ export default class Login extends React.Component {
 		}
 		}).catch(error => {alert("please fill valid details");
                 this.reset();});
-                
-        */
 
 	}
 	
@@ -69,7 +63,8 @@ export default class Login extends React.Component {
 			
 		<div>
 			<Card className={"border border-dark bg-dark text-white"}>
-			<Card.Header> Login </Card.Header>
+			<Card.Header> <h3>STUDENT COLLABORATION PORTAL</h3><br/>
+			Login </Card.Header>
 			
 			<Form id="FormId" onSubmit={this.onSubmit} onReset={this.reset}>
 			<Card.Body>

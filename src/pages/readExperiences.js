@@ -1,8 +1,6 @@
 import axios from 'axios'; 
 import React,{Component} from 'react'; 
-import  {Container,Row,Col,Button,Card, CardDeck, CardColumns} from 'react-bootstrap'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faThumbsUp} from '@fortawesome/free-solid-svg-icons';
+import  {Container,Row,Col,Button,Card, CardDeck, Table, Jumbotron} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
   
 class readExperiences extends Component { 
@@ -10,7 +8,10 @@ class readExperiences extends Component {
     constructor(props){
       super(props);
       this.state = {exp:[]};
-      this.patch=this.patch.bind(this);
+  }
+
+  writeExp = () =>{
+    this.props.history.push("/writeExp");
   }
   
   // get request may take few seconds, meanwhile response will have [Promise] object, once the data is got, response gets converted to JSON string
@@ -27,19 +28,6 @@ class readExperiences extends Component {
       console.log("error getting");
     })
   }
-  
-  patch = (id,data) => {
-    let url="/interviewData/"+id+"/";
-    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} ).then(Response => {console.log(Response)})
-    .catch(e => console.log("error"))
-    window.location.reload();
-  }
-  upvote = (id,num) => {
-    const data={
-      numberofUpvotes: num,
-    }
-    this.patch(id,data);
-  };
 
   // function to return the display html to render
     fileData = () => { 
@@ -47,33 +35,38 @@ class readExperiences extends Component {
       if(this.state.exp)
       {
         const exps = this.state.exp.map((e) =>
-          (<div key={e.id}>
-              <Card className={"border border-dark bg-white text-dark text-left"}>
-                <Card.Header as="h5">Title: 
-                  <Card.Link href={"/readOneExp/"+e.id}>{e.title}</Card.Link>
-                </Card.Header>
-                <Card.Body className="text-black">
-                  <Row>
-                    <Col>Author: {e.name}</Col>
-                    <Col className="text-right">
-                      <Button className="btn pull-right" variant="light" size="sm" onClick={() => this.upvote(e.id,e.numberofUpvotes+1)}>
-                      <FontAwesomeIcon icon={faThumbsUp}/>{' '}{e.numberofUpvotes}</Button>
-                    </Col>
-                  </Row>
-                </Card.Body>
-              </Card>
-              <br/>
-          </div>));
-
-       return(
-          <div>
-            <h1 className="text-white">Experiences</h1>
-            <CardColumns>
+            (
+            <tr key={e.id}>
+                <td>{e.title}</td>
+                <td>{e.name}</td>
+                <td>{e.company}</td>
+                <td><a href={"/readOneExp/"+e.id} className={"text-white"}><b> Link </b></a></td>
+            </tr>));
+  
+         return(
+             
+            <div>
+                <center>
+                  <Jumbotron>
+                    <h2 style={{color:"black"}}>Interview Experiences</h2><br/>
+                    <Table className={"border border-dark bg-dark text-white"}>
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Auther</th>
+                            <th>Company</th>
+                            <th>Link</th>
+                        </tr>
+                        {exps}
+                        </thead>
+                    </Table>
+                      <hr/>
+                      <Button onClick={this.writeExp}>Write Exp</Button>
+                    </Jumbotron>
                 
-              {exps}
-            </CardColumns>
-          </div>
-        );
+                </center>
+            </div>
+          );
       }
       return ;
     } 

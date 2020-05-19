@@ -21,7 +21,7 @@ class writeExp extends Component {
     e.preventDefault() // Stop form submit
     
     const details={
-      name:this.state.name,
+      name:localStorage.getItem("user"),
       yearPassout:this.state.grad_year,
       yearPlaced:this.state.placed_year,
       experience:this.state.exp,
@@ -35,6 +35,7 @@ class writeExp extends Component {
       console.log(response);
   }).
   catch(error => alert("please enter valid inputs"));
+  //this.props.history.push("/readExperiences");
 
   }
 
@@ -59,19 +60,11 @@ class writeExp extends Component {
                     <Card.Header>Experience Form</Card.Header>
                         <Form.Row>
                           <Form.Group as={Col} controlId="formGrid">
-                              <Form.Label>Name</Form.Label>
-                              <Form.Control type="text" name="name" value={this.state.name} onChange={this.onChange}
-                                placeholder="Enter name"
-                                className={"bg-dark text-white"}/>
-                          </Form.Group>
-                          <Form.Group as={Col} controlId="formGrid">
                                 <Form.Label>Graduation Year from IIITB</Form.Label>
                                 <Form.Control type="text" name="grad_year" value={this.state.grad_year} onChange={this.onChange}
                                 placeholder="Enter graduation year"
                                 className={"bg-dark text-white"}/>
                           </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
                           <Form.Group as={Col} controlId="formGrid">
                               <Form.Label>Company</Form.Label>
                               <Form.Control type="text" name="company" value={this.state.company} onChange={this.onChange}
@@ -89,7 +82,7 @@ class writeExp extends Component {
                           <Form.Group as={Col} controlId="formGrid">
                               <Form.Label>Title of Experience</Form.Label>
                               <Form.Control type="text" name="title" value={this.state.title} onChange={this.onChange}
-                                placeholder="Enter company name you are working in"
+                                placeholder="Enter title"
                                 className={"bg-dark text-white"}/>
                           </Form.Group>
                         </Form.Row>

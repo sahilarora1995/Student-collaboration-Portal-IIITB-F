@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Col, Container, Row } from "reactstrap";
 import StudentList from "./StudentList";
 import NewStudentModal from "./NewStudentModal";
+import NavigationBar from "./NavigationBar"
 
 import axios from "axios";
 
@@ -27,6 +28,8 @@ class Home extends Component {
 
   render() {
     return (
+    <div>
+      <NavigationBar/>
       <Container style={{ marginTop: "20px" }}>
         <Row>
           <Col>
@@ -42,6 +45,7 @@ class Home extends Component {
           </Col>
         </Row>
       </Container>
+    </div>
     );
   }
 }

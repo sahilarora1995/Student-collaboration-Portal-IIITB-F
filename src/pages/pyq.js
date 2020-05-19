@@ -6,7 +6,7 @@ import {Card, Form, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave} from '@fortawesome/free-solid-svg-icons';
 
-class semester extends Component {
+class pyq extends Component {
 	constructor(props) {
             super(props);
             this.state={
@@ -35,7 +35,10 @@ class semester extends Component {
     async componentDidMount(){
         await axios.get('/getData/')
         .then(Response =>{
-            this.setState({images:Response.data});
+            var verified =  Response.data.filter(function(tuple) {
+                return tuple.verified ==true;
+              });
+              this.setState({images:verified});
         })
         .catch(error => {
         console.log("error getting");
@@ -64,7 +67,10 @@ class semester extends Component {
         {params}
         ).
         then(Response =>{
-        this.setState({images:Response.data});
+            var unverified =  Response.data.filter(function(tuple) {
+                return tuple.verified ==true;
+              });
+              this.setState({images:unverified});
         }).
         catch(error => {
         console.log("error getting");
@@ -157,7 +163,6 @@ class semester extends Component {
         if(semester1.sem == this.state.selectedSem)
             semester=semester1.subjects;
         })
-        console.log(semester);
 
 		return(
 		<div>
@@ -228,4 +233,4 @@ class semester extends Component {
 	}
 }
 
-export default semester;
+export default pyq;

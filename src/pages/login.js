@@ -23,7 +23,6 @@ export default class Login extends React.Component {
 			id: this.state.id,
 			password:this.state.password,
         }
-		localStorage.setItem('loggedin',true);
 		
 		axios.get("/loginData/"+user.id)
 		.then(response => {
@@ -31,6 +30,7 @@ export default class Login extends React.Component {
 			{
 				localStorage.setItem('loggedin',true);
 				localStorage.setItem('user',response.data.username);
+				localStorage.setItem('role',response.data.role);
 				this.props.history.push('/welcome');
 			} 
 			else{

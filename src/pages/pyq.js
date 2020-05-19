@@ -11,7 +11,7 @@ class semester extends Component {
             super(props);
             this.state={
             semesters:[
-            { sem: 1,  subjects: ['Algorithms', 'ML', 'MML','SS','CNW','DM']},
+            { sem: 1,  subjects: ['Algorithms', 'ML', 'MML','SS','CNW','Discrete Mathematics']},
             { sem: 2, subjects: ['SPE', 'Data Modelling', 'WAN','MAS']},
             { sem: 3, subjects: ['job3-1', 'job3-2', 'job3-3']},
             { sem: 4, subjects: ['job3-1', 'job3-2', 'job3-3']}
@@ -100,6 +100,7 @@ class semester extends Component {
         formData.set('year',this.state.year);
         formData.set('resourceType',"PYQ");
         formData.set('semester',this.state.selectedSem);
+        formData.set('author',localStorage.getItem("user"))
         
         formData.append('file',file)
         debugger;
@@ -203,7 +204,7 @@ class semester extends Component {
                             </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGrid">
-                    <Form.Label>Submit</Form.Label>
+                    <Form.Label>Submit</Form.Label><br/>
                     <Button size="sm" variant="success" onClick={this.onGet}>
 			            <FontAwesomeIcon icon={faSave}/> Get </Button>{'  '}<br/>
                     </Form.Group>

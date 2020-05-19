@@ -25,7 +25,6 @@ class Welcome extends Component {
         <NavigationBar/>
      <header>
 <nav class="nav npc">
-    <a href="http://localhost:3000/welcome/" class="nav-item" active-color="orange">Home</a>
     <a href="http://localhost:3000/pyq/" class="nav-item" active-color="green">PYQ</a>
     <a href="http://localhost:3000/readIntervieworwrite/" class="nav-item" active-color="blue">INTERVIEWS EXPERIENCES</a>
     <a href="http://localhost:3000/semester/" class="nav-item" active-color="red">VIDEOS</a>
@@ -53,7 +52,6 @@ class Welcome extends Component {
   <div class="nav nmb">
     <div class="nav__content">
         <ul class="nav__list">
-            <li class="nav__list-item"><a href="http://localhost:3000/welcome/" class="hover-target">Home</a></li>
             <li class="nav__list-item"><a href="http://localhost:3000/pyq/" class="hover-target">PYQ</a></li>
             <li class="nav__list-item"><a href="http://localhost:3000/semester/" class="hover-target">VIDEOS</a></li>
             <li class="nav__list-item"><a href="http://localhost:3000/readIntervieworwrite" class="hover-target">INTERVIEWS EXPERIENCES</a></li>

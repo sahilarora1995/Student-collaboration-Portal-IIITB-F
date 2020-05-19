@@ -58,7 +58,6 @@ export default class Login extends React.Component {
 	}
 	render() {
 		const {id, password} = this.state;
-		localStorage.setItem("loggedin",false);
 		return(
 			
 		<div>

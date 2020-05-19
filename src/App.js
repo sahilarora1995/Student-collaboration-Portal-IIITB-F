@@ -19,6 +19,7 @@ import register from './pages/register'
 import videoPage from './pages/videoPage'
 import playVideo from './pages/playVideo'
 import addVideo from './pages/addVideo'
+import adminVerify from './pages/adminVerify'
 
 import  {Col,Container} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,10 +34,7 @@ class App extends Component {
     }
 
     return (
-        
-      
       <Router basename="/react-auth-ui/">
-        
         
         <Col lg={12} style={marginTop}>
           <Container>
@@ -45,6 +43,7 @@ class App extends Component {
             <Route exact path='/semester' component={semester}/>
             <Route exact path='/pyq' component={pyq}/>
             <Route exact path='/readOnePYQ/:id' component={readOnePYQ}/>
+            <Route exact path='/adminVerify/:id' component={adminVerify}/>
           </Container>
           
           <Route exact path='/welcome' component={Welcome}/>
@@ -57,6 +56,7 @@ class App extends Component {
             <Route exact path='/readIntervieworwrite' component={readIntervieworwrite} />
             <Route exact path='/readExperiences' component={readExperiences} />
             <Route exact path='/readOneExp/:id' component={readOneExp}/>
+            
             <Route exact path='/videoPage' component={videoPage}/>
             <Route exact path='/playVideo' component={playVideo}/>
             <Route exact path='/addVideo' component={addVideo}/>

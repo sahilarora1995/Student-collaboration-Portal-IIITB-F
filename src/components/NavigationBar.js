@@ -15,9 +15,20 @@ class NavigationBar extends React.Component{
     logout=(event)=>{
 
       event.preventDefault();
-      localStorage.setItem("loggedin",false);
-      this.setState({value:false});
-      //window.location.reload();
+      localStorage.clear();
+    }
+
+    admin(){
+      if(localStorage.getItem("role")==="admin")
+        {
+          return(
+            <NavDropdown title="Verify" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/adminVerify/1">Previous Year Questions</NavDropdown.Item>
+                    <NavDropdown.Item href="/adminVerify/2">Interview Experiences</NavDropdown.Item>
+                    <NavDropdown.Item href="/adminVerify/3">Video Resources</NavDropdown.Item>
+            </NavDropdown>
+          );
+        }
     }
 
   render(){
@@ -34,6 +45,7 @@ class NavigationBar extends React.Component{
                     <NavDropdown.Item href="/semester/">Video Resources</NavDropdown.Item>
                     <NavDropdown.Item href="/mockSchedule/">Mock Interviews</NavDropdown.Item>
                   </NavDropdown>
+                  {this.admin()}
                 </Nav>
 
           <Nav pullright="true" className="ml-auto">

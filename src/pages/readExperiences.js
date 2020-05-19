@@ -22,8 +22,11 @@ class readExperiences extends Component {
 
     await axios.get('/interviewData/')
     .then(Response =>{
-      this.setState({exp:Response.data});
-    })
+        var verified =  Response.data.filter(function(tuple) {
+          return tuple.verified ==true;
+        });
+        this.setState({exp:verified});
+      })
     .catch(error => {
       console.log("error getting");
     })
@@ -53,7 +56,7 @@ class readExperiences extends Component {
                         <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Auther</th>
+                            <th>Author</th>
                             <th>Company</th>
                             <th>Link</th>
                         </tr>

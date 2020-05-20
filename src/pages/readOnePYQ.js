@@ -4,6 +4,7 @@ import  {Container,Row,Jumbotron,Col,Table,Image,Button,Figure,Card,Form} from '
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
 import NavigationBar from '../components/NavigationBar'
+import { BrowserRouter } from 'react-router-dom';
   
 class readOnePYQ extends Component { 
 
@@ -22,9 +23,11 @@ class readOnePYQ extends Component {
       console.log(this.state.exp);
     })
     .catch(error => {
-      console.log("error getting");
+        alert("Post does not exist");
+        this.props.history.push("/pyq");
     })
-    await axios.get("/pyq/comments/"+this.props.match.params.id)
+
+    await axios.get("/pyq/comments/"+this.props.match.params.id+"/")
 		.then(response => {
 			this.setState({comments: response.data});
 		}).catch(error => {
@@ -137,7 +140,20 @@ class readOnePYQ extends Component {
   // function to return the display html to render
     fileData = () => { 
 
-		const e=this.state.exp;
+    const e=this.state.exp;
+    if(e=='')
+    {
+      return(
+        <div>
+          <Jumbotron className={"text-dark"}>
+            <h3><b>Previous year questions</b></h3>
+              <Card className={"border border-dark bg-dark text-white text-left"}>
+                <Card.Header> Loading ...</Card.Header>
+              </Card>
+            </Jumbotron>
+          </div>
+      )
+    }
         
 		return (
 			<div>

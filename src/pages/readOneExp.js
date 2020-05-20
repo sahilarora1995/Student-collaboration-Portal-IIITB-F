@@ -1,6 +1,6 @@
 import axios from 'axios'; 
 import React,{Component} from 'react'; 
-import  {Navbar,Nav,Container,Row,Jumbotron,Col,Table,Image,Button,Form,Card} from 'react-bootstrap'
+import  {Container,Row,Jumbotron,Col,Button,Form,Card} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
 import NavigationBar from '../components/NavigationBar'
@@ -9,7 +9,7 @@ class readOneExp extends Component {
 
     constructor(props){
       super(props);
-      this.state = {exp:new Object(),comments:[]};
+      this.state = {exp:'',comments:[]};
       this.patch=this.patch.bind(this);
       this.addComment = this.addComment.bind(this);
   }
@@ -22,7 +22,8 @@ class readOneExp extends Component {
       console.log(this.state.exp);
     }).
     catch(error => {
-      console.log("error getting");
+      alert("Post does not exist");
+        this.props.history.push("/readExperiences");
     })
     await axios.get("/exp/comments/"+this.props.match.params.id)
 		.then(response => {
@@ -100,7 +101,7 @@ class readOneExp extends Component {
 		
 		if (this.state.comments) {
 			const comments1 = this.state.comments.map(({ id, author, commentBody, pyq,created}) =>
-				(<div style={{textAlign: "left", marginLeft: "40px"}}>
+				(<div style={{textAlign: "left", marginLeft: "40px"}} key={id}>
 					<span><b>{author}</b> <span style={{color: "black",textAlign: "right",fontSize:"14px"}}>commented at {created} UTC</span></span>
 					<span style={textNormal}>{this.displayPara(commentBody)}</span>{' '}
           <hr/>
@@ -143,6 +144,20 @@ class readOneExp extends Component {
       var experience=String(e.experience);
       var array=experience.split("\n");
       console.log(array);
+
+      if(e=='')
+    {
+      return(
+        <div>
+          <Jumbotron className={"text-dark"}>
+            <h3><b>Interview Experiences</b></h3>
+              <Card className={"border border-dark bg-dark text-white text-left"}>
+                <Card.Header> Loading ...</Card.Header>
+              </Card>
+            </Jumbotron>
+          </div>
+      )
+    }
           
       return (
         <div>

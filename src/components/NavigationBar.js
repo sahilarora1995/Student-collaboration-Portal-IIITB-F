@@ -48,7 +48,7 @@ class NavigationBar extends React.Component{
                   <NavDropdown title="Menu" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/pyq/">Previous Year Questions</NavDropdown.Item>
                     <NavDropdown.Item href="/readIntervieworwrite/">Interview Experiences</NavDropdown.Item>
-                    <NavDropdown.Item href="/semester/">Video Resources</NavDropdown.Item>
+                    <NavDropdown.Item href="/videoPage/">Video Resources</NavDropdown.Item>
                     <NavDropdown.Item href="/mockSchedule/">Mock Interviews</NavDropdown.Item>
                   </NavDropdown>
                   {this.admin()}

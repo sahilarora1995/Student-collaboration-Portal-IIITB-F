@@ -17,7 +17,7 @@ class adminVerify extends Component {
     async componentDidMount(){
         var id=this.props.match.params.id;
         var url="";
-        (id==1)?(url="/getData"):(id==2)?(url="/interviewData"):(url="/videos/getData");
+        (id==1)?(url="/getData"):(id==2)?(url="/interviewData"):(url="/getVideoData");
         console.log(url);
 
         await axios.get(url)
@@ -36,8 +36,8 @@ class adminVerify extends Component {
     delete = (id) => {
         var parid=this.props.match.params.id;
         var url="";
-        (parid==1)?(url="/deleteData/"+id):(parid==2)?(url="/interviewData/"+id+"/"):(url="/videos/getData");
-
+        (parid==1)?(url="/deleteData/"):(parid==2)?(url="/interviewData/"):(url="/deleteVideoData/");
+        url += id+"/";
 		axios.delete(url)
 		.then(response => {
 			if (response.data != null) {
@@ -54,8 +54,8 @@ class adminVerify extends Component {
     patch = (id,ver) => {
         var parid=this.props.match.params.id;
         var url="";
-        (parid==1)?(url="/getData/"+id+"/"):(parid==2)?(url="/interviewData/"+id+"/"):(url="/videos/getData");
-
+        (parid==1)?(url="/getData/"):(parid==2)?(url="/interviewData/"):(url="/updateVideoData/");
+        url += id+"/";
         const data={
             verified: ver,
           }
@@ -72,7 +72,7 @@ class adminVerify extends Component {
     fileDownload = () => {
         var id=this.props.match.params.id;
         var url="";
-        (id==1)?(url="/readOnePYQ/"):(id==2)?(url="/readOneExp/"):(url="/videos/getData");
+        (id==1)?(url="/readOnePYQ/"):(id==2)?(url="/readOneExp/"):(url="/playVideo/");
 
         var module="";
         (id==1)?(module="Previous Year Questions"):(id==2)?(module="Interview Experiences"):(module="Video Resources");

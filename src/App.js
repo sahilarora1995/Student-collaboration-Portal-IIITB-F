@@ -58,7 +58,7 @@ class App extends Component {
             <Route exact path='/readOneExp/:id' component={readOneExp}/>
             
             <Route exact path='/videoPage' component={videoPage}/>
-            <Route exact path='/playVideo' component={playVideo}/>
+            <Route exact path='/playVideo/:id' component={playVideo}/>
             <Route exact path='/addVideo' component={addVideo}/>
             <Route exact path='/aboutus' component={aboutus}/>
         </Col>

@@ -6,30 +6,37 @@ import axios from 'axios';
 export default class playVideo extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {comments: []};
+		this.state = {video:'', comments: []};
 		this.addComment = this.addComment.bind(this);
 	}
 	async componentDidMount() {
-		await axios.get("/videos/comments/"+localStorage.getItem("VideoId"))
-		.then(response => {
-			this.setState({comments: response.data});
-		}).catch(error => {
-			console.log(error)
-		});
+		const videoId = this.props.match.params.id;
+		await axios.get('/getVideoData/' + videoId)
+			.then(response => {
+				this.setState({ video: response.data });
+			}).catch(error => {
+				console.log("Error in getting video : " + error);
+			});
+		await axios.get("/commentsOnVideo/" + videoId)
+			.then(response => {
+				this.setState({ comments: response.data });
+			}).catch(error => {
+				console.log(error)
+			});
 	}
 
 	addComment = () => {
-		if (this.nameTextInput.value.length > 0 && this.commentTextInput.value.length > 0) {
-			const vidId = localStorage.getItem("VideoId");
+		if (this.commentTextInput.value.length > 0) {
+			const vidId = this.props.match.params.id;
 			const com = {
-				author: this.nameTextInput.value,
+				author: localStorage.getItem("user"),
 				commentBody: this.commentTextInput.value,
 				videocontent: vidId
 			};
 			
-			axios.post("/videos/comments/"+vidId, com)
+			axios.post("/commentsOnVideo/"+vidId, com)
 			.then( response => {
-				axios.get("/videos/comments/"+vidId)
+				axios.get("/commentsOnVideo/"+vidId)
 				.then(res => {
 					this.setState({comments: res.data});
 				}).catch(err => {
@@ -43,7 +50,6 @@ export default class playVideo extends React.Component {
 	};
 
 	componentDidUpdate() {
-		this.nameTextInput.value = '';
 		this.commentTextInput.value = '';
 	}
 	renderComments = () => {
@@ -79,7 +85,6 @@ export default class playVideo extends React.Component {
 							<div className="row" style={alignLeft}>
 								<br />
 								<div className="col-md-7">
-								<input type="text" placeholder="Enter your name" ref={(ref) => this.nameTextInput = ref} className="form-control" required/>
 								<input type="text" placeholder="Enter your comment" ref={(ref) => this.commentTextInput = ref} className="form-control" />
 								</div>
 								<div className="col-md-4">
@@ -100,13 +105,16 @@ export default class playVideo extends React.Component {
 		const textBlack = {
 			color: "black"
 		}
+		const vid = this.state.video;
 		return (
 			<div>
 				<Jumbotron>
-					<h1 style={textBlack}>Video</h1>
+					<h3 style={textBlack}>Video</h3>
+					<h5 style={textBlack}>Semester: {vid.semester}, Subject: {vid.subject}, Year: {vid.year}, Speaker: {vid.speaker}</h5>
+					<hr/>
 					<center>
 					<ReactPlayer 
-						url={localStorage.getItem("VideoURL")}
+						url={vid.file}
 						controls/>
 					</center>
 					{this.renderComments()}

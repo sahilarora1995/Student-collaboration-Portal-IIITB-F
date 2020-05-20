@@ -5,10 +5,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// keeping track of login status
-if(!localStorage.getItem("loggedin"))
-  localStorage.setItem("loggedin",false);
-
 ReactDOM.render(
     <App />
   ,

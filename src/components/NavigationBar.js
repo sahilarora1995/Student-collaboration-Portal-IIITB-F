@@ -1,6 +1,7 @@
 import React from 'react';
 import {Navbar,Nav, Button,NavDropdown} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 class NavigationBar extends React.Component{
 
@@ -32,6 +33,11 @@ class NavigationBar extends React.Component{
     }
 
   render(){
+    if(!localStorage.getItem("user"))
+    {
+      alert("you have to log in");
+      return <Redirect to="/"/> ;
+    }
     
       return(
         <Navbar collapseOnSelect bg="dark" variant="dark" fixed="top" style={{height: '50px'}}>

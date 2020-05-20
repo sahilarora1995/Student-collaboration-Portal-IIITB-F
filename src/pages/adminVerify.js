@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import axios, { post } from 'axios';
-import  {Col,Table, Jumbotron} from 'react-bootstrap'
+import axios from 'axios';
+import  {Table} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
-import {Card, Form, Button,ButtonGroup} from 'react-bootstrap';
+import {Card, Button,ButtonGroup} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave,faTrash,faList} from '@fortawesome/free-solid-svg-icons';
 
@@ -33,16 +33,16 @@ class adminVerify extends Component {
         })
     }
 
-    delete = (dataid) => {
-        var id=this.props.match.params.id;
+    delete = (id) => {
+        var parid=this.props.match.params.id;
         var url="";
-        (id==1)?(url="/deleteData/"+id):(id==2)?(url="/interviewData/"+id+"/"):(url="/videos/getData");
+        (parid==1)?(url="/deleteData/"+id):(parid==2)?(url="/interviewData/"+id+"/"):(url="/videos/getData");
 
 		axios.delete(url)
 		.then(response => {
 			if (response.data != null) {
 				this.setState({
-					data: this.state.data.filter(data => data.id !== dataid)
+					data: this.state.data.filter(data => data.id !== id)
 				});
             }
             else{
@@ -54,7 +54,7 @@ class adminVerify extends Component {
     patch = (id,ver) => {
         var parid=this.props.match.params.id;
         var url="";
-        (parid==1)?(url="/getData/"+parid+"/"):(parid==2)?(url="/interviewData/"+parid+"/"):(url="/videos/getData");
+        (parid==1)?(url="/getData/"+id+"/"):(parid==2)?(url="/interviewData/"+id+"/"):(url="/videos/getData");
 
         const data={
             verified: ver,
@@ -76,25 +76,9 @@ class adminVerify extends Component {
 
         var module="";
         (id==1)?(module="Previous Year Questions"):(id==2)?(module="Interview Experiences"):(module="Video Resources");
-        if(this.state.data)
-        {
-          const list = this.state.data.map((e) =>
-            (
-            <tr key={e.id}>
-                <td>{e.id}</td>
-                <td><a href={url+e.id} className={"text-white"}><b> Link </b></a></td>
-                <td>
-					<ButtonGroup>
-                        <Button size='sm' variant="outline-success" onClick={this.patch.bind(this, e.id,true)}><FontAwesomeIcon icon={faSave}/></Button>
-					    <Button size='sm' variant="outline-danger" onClick={this.delete.bind(this, e.id)}><FontAwesomeIcon icon={faTrash}/></Button>
-					</ButtonGroup>
-				</td>
-            </tr>));
   
          return(
-             
             <div>
-
                 <Card className={"border border-dark bg-dark text-white"}>
 				<Card.Header><FontAwesomeIcon icon={faList}/>  {module}  </Card.Header>
 				<Card.Body>
@@ -106,15 +90,31 @@ class adminVerify extends Component {
                             <th>LINK</th>
                             <th>VERIFY</th>
                         </tr>
-                        {list}
+                        {this.state.data.length <= 0 ? (
+                                    <tr>
+                                        <td colSpan="6" align="center">
+                                            <b>There is no data yet</b>
+                                        </td>
+                                    </tr>
+                                    ):
+                                    this.state.data.map((e) =>
+                                    (
+                                        <tr key={e.id}>
+                                            <td>{e.id}</td>
+                                            <td><a href={url+e.id} className={"text-white"}><b> Link </b></a></td>
+                                            <td>
+                                                <ButtonGroup>
+                                                    <Button size='sm' variant="outline-success" onClick={this.patch.bind(this, e.id,true)}><FontAwesomeIcon icon={faSave}/></Button>
+                                                    <Button size='sm' variant="outline-danger" onClick={this.delete.bind(this, e.id)}><FontAwesomeIcon icon={faTrash}/></Button>
+                                                </ButtonGroup>
+                                            </td>
+                                        </tr>))}
                         </thead>
                     </Table>
                     </Card.Body>
 			</Card>
             </div>
           );
-        }
-        return ;
       }
 
 	render() {

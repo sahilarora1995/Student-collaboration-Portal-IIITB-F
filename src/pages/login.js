@@ -28,17 +28,16 @@ export default class Login extends React.Component {
 		.then(response => {
 			if(response.data.rollNumber===user.id && response.data.password===user.password)
 			{
-				localStorage.setItem('loggedin',true);
 				localStorage.setItem('user',response.data.username);
 				localStorage.setItem('role',response.data.role);
 				this.props.history.push('/welcome');
 			} 
 			else{
-				alert("please fill valid details");
+				alert("Incorrect password");
 				this.reset();
 				this.props.history.push('/');
 		}
-		}).catch(error => {alert("please fill valid details");
+		}).catch(error => {alert("please fill valid details-User Id not found");
                 this.reset();});
 
 	}

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import  {Card,Container,Row,Jumbotron,Col, Button} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 
 class Welcome extends Component {
@@ -10,28 +8,19 @@ class Welcome extends Component {
   }
 
   render() {
-    if(localStorage.getItem('loggedin')==='false')
-    {
-      alert("you have to log in");
-      return <Redirect to="/"/> ;
-    }
-      const marginTop={
-        marginTop:"20px",
-        alignItems:"center"
-      }
         return (
 
       <div>  
         <NavigationBar/>
-     <header>
-<nav class="nav npc">
-    <a href="http://localhost:3000/pyq/" class="nav-item" active-color="green">PYQ</a>
-    <a href="http://localhost:3000/readIntervieworwrite/" class="nav-item" active-color="blue">INTERVIEWS EXPERIENCES</a>
-    <a href="http://localhost:3000/semester/" class="nav-item" active-color="red">VIDEOS</a>
-    <a href="http://localhost:3000/mockSchedule/" class="nav-item" active-color="rebeccapurple">MOCK INTERVIEWS</a>
-    <a href="http://localhost:3000/aboutus/" class="nav-item" active-color="rebeccapurple">ABOUT US</a>
-    <span class="nav-indicator"></span>
-  </nav>
+          <header>
+            <nav class="nav npc">
+                <a href="http://localhost:3000/pyq/" class="nav-item" active-color="green">PYQ</a>
+                <a href="http://localhost:3000/readIntervieworwrite/" class="nav-item" active-color="blue">INTERVIEWS EXPERIENCES</a>
+                <a href="http://localhost:3000/semester/" class="nav-item" active-color="red">VIDEOS</a>
+                <a href="http://localhost:3000/mockSchedule/" class="nav-item" active-color="rebeccapurple">MOCK INTERVIEWS</a>
+                <a href="http://localhost:3000/aboutus/" class="nav-item" active-color="rebeccapurple">ABOUT US</a>
+                <span class="nav-indicator"></span>
+              </nav>
 
   
   <header class="cd-header">

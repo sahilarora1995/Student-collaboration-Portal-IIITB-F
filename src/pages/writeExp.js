@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import  {Container,Row,Col, Card,Form,Button} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 class writeExp extends Component {
   constructor(props) {
@@ -32,14 +33,14 @@ class writeExp extends Component {
     
   axios.post("http://localhost:8000/interviewData/", details).
   then(response => {
-      console.log(response);
+      //ToastsStore.success("Submitted, admin will verify");
+      alert("Submitted, admin will verify");
+      this.props.history.push('/readExperiences');
   }).
-  catch(error => alert("please enter valid inputs"));
-  //this.props.history.push("/readExperiences");
-
+  catch(error => 
+    ToastsStore.error("please enter valid inputs"));
   }
 
-  
     render() {
       const marginTop={
         marginTop:"20px",
@@ -50,6 +51,7 @@ class writeExp extends Component {
           
           <center>
             <NavigationBar/>
+            <ToastsContainer position={ToastsContainerPosition.TOP_RIGHT} store={ToastsStore}/>
             <Container>
             <Row>
               <Col lg={12} style={marginTop}>
@@ -61,9 +63,16 @@ class writeExp extends Component {
                         <Form.Row>
                           <Form.Group as={Col} controlId="formGrid">
                                 <Form.Label>Graduation Year from IIITB</Form.Label>
-                                <Form.Control type="text" name="grad_year" value={this.state.grad_year} onChange={this.onChange}
-                                placeholder="Enter graduation year"
-                                className={"bg-dark text-white"}/>
+                                <Form.Control as="select" value={this.state.grad_year} name="grad_year" onChange={this.onChange} required className={"bg-dark text-white"}>
+                                  <option></option>
+                                  <option value="2014">2014</option>
+                                  <option value="2015">2015</option>
+                                  <option value="2016">2016</option>
+                                  <option value="2017">2017</option>
+                                  <option value="2018">2018</option>
+                                  <option value="2019">2019</option>
+                                  <option value="2020">2020</option>
+                                </Form.Control>
                           </Form.Group>
                           <Form.Group as={Col} controlId="formGrid">
                               <Form.Label>Company</Form.Label>
@@ -73,9 +82,16 @@ class writeExp extends Component {
                           </Form.Group>
                           <Form.Group as={Col} controlId="formGrid">
                                 <Form.Label>Placement year</Form.Label>
-                                <Form.Control type="text" name="placed_year" value={this.state.placed_year} onChange={this.onChange}
-                                placeholder="Enter placement year"
-                                className={"bg-dark text-white"}/>
+                                <Form.Control as="select" value={this.state.placed_year} name="placed_year" onChange={this.onChange} required className={"bg-dark text-white"}>
+                                  <option></option>
+                                  <option value="2014">2014</option>
+                                  <option value="2015">2015</option>
+                                  <option value="2016">2016</option>
+                                  <option value="2017">2017</option>
+                                  <option value="2018">2018</option>
+                                  <option value="2019">2019</option>
+                                  <option value="2020">2020</option>
+                                </Form.Control>
                           </Form.Group>
                         </Form.Row>
                         <Form.Row>

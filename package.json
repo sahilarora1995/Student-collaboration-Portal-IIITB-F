@@ -20,6 +20,7 @@
     "react-player": "^2.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-toasts": "^3.0.6",
     "reactstrap": "^8.4.1",
     "start": "^5.1.0"
   },

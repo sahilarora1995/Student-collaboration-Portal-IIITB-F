@@ -44,6 +44,7 @@ class App extends Component {
             <Route exact path='/pyq' component={pyq}/>
             <Route exact path='/readOnePYQ/:id' component={readOnePYQ}/>
             <Route exact path='/adminVerify/:id' component={adminVerify}/>
+            <Route exact path='/videoPage' component={videoPage}/>
           </Container>
           
           <Route exact path='/welcome' component={Welcome}/>
@@ -57,7 +58,7 @@ class App extends Component {
             <Route exact path='/readExperiences' component={readExperiences} />
             <Route exact path='/readOneExp/:id' component={readOneExp}/>
             
-            <Route exact path='/videoPage' component={videoPage}/>
+            
             <Route exact path='/playVideo/:id' component={playVideo}/>
             <Route exact path='/addVideo' component={addVideo}/>
             <Route exact path='/aboutus' component={aboutus}/>

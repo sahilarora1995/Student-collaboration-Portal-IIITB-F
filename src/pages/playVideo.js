@@ -2,6 +2,7 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import {Jumbotron, Row, Container, Col, Button} from 'react-bootstrap';
 import axios from 'axios';
+import NavigationBar from '../components/NavigationBar'
 
 export default class playVideo extends React.Component {
 	constructor(props) {
@@ -34,7 +35,7 @@ export default class playVideo extends React.Component {
 				videocontent: vidId
 			};
 			
-			axios.post("/commentsOnVideo/"+vidId, com)
+			axios.post("/commentsOnVideo/"+vidId+"/", com)
 			.then( response => {
 				axios.get("/commentsOnVideo/"+vidId)
 				.then(res => {
@@ -131,6 +132,8 @@ export default class playVideo extends React.Component {
 			alignItems: "center"
 		}
 		return(
+			<div>
+				<NavigationBar/>
 			<Container>
 				<Row>
 					<Col lg={12} style={marginTop}>
@@ -140,6 +143,7 @@ export default class playVideo extends React.Component {
 					</Col>
 				</Row>
 			</Container>
+			</div>
 		)
 	}
 }

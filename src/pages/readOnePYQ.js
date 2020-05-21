@@ -1,26 +1,28 @@
 import axios from 'axios'; 
 import React,{Component} from 'react'; 
-import  {Container,Row,Jumbotron,Col,Table,Image,Button,Figure,Card,Form} from 'react-bootstrap'
+import  {Container,Row,Jumbotron,Col,Button,Figure,Card} from 'react-bootstrap'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faThumbsUp, faThumbsDown} from '@fortawesome/free-solid-svg-icons';
 import NavigationBar from '../components/NavigationBar'
-import { BrowserRouter } from 'react-router-dom';
   
 class readOnePYQ extends Component { 
 
     constructor(props){
       super(props);
-      this.state = {exp:'',comments:[]};
+      this.state = {exp:'',comments:[],votes:0,commentTextInput:''};
       this.patch=this.patch.bind(this);
       this.addComment = this.addComment.bind(this);
+  }
+
+  onChange(e){
+    this.setState({commentTextInput:e.target.value});
   }
 
   async componentDidMount(){
 
     await axios.get('/getData/'+this.props.match.params.id+"/")
     .then(Response =>{
-      this.setState({exp:Response.data});
-      console.log(this.state.exp);
+      this.setState({exp:Response.data,votes:Response.data.numberofUpvotes});
     })
     .catch(error => {
         alert("Post does not exist");
@@ -37,9 +39,11 @@ class readOnePYQ extends Component {
 
   patch = (id,data) => {
     let url="/getData/"+id+"/";
-    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} ).then(Response => {console.log(Response)})
+    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} )
+    .then(Response => {
+      this.setState({votes: this.state.votes+1});
+    })
     .catch(e => console.log("error"))
-    window.location.reload();
   }
   upvote = (id,num) => {
     const data={
@@ -49,21 +53,21 @@ class readOnePYQ extends Component {
   };
 
   addComment = () => {
-    if (this.commentTextInput.value.length > 0) {
+    if (this.state.commentTextInput.length > 0) {
       const id=parseInt(this.props.match.params.id,10);
 			const com = {
 				author: localStorage.getItem("user"),
-				commentBody: this.commentTextInput.value,
+				commentBody: this.state.commentTextInput,
 				pyq: id,
       };
-      console.log(com);
       
 			let url="/pyq/comments/"+id+"/";
 			axios.post(url, com,{headers:{'Content-Type':'application/json'}})
 			.then( response => {
-				axios.get("/pyq/comments/"+this.props.match.params.id)
+				axios.get("/pyq/comments/"+this.props.match.params.id+"/")
 				.then(res => {
-					this.setState({comments: res.data});
+          this.setState({comments: res.data});
+          this.setState({commentTextInput:''});
 				}).catch(err => {
 					console.log("Error in getting comments after update");
 				})
@@ -77,7 +81,6 @@ class readOnePYQ extends Component {
   displayPara = (commentBody) => {
       var comment=String(commentBody);
       var array=comment.split("\n");
-      console.log(array);
       return(
       array.map((i,key) => {
         return <div key={key}>{i}<br/></div>;
@@ -103,7 +106,7 @@ class readOnePYQ extends Component {
 		
 		if (this.state.comments) {
 			const comments1 = this.state.comments.map(({ id, author, commentBody, pyq,created}) =>
-				(<div style={{textAlign: "left", marginLeft: "40px"}}>
+				(<div style={{textAlign: "left", marginLeft: "40px"}} key={id}>
 					<span><b>{author}</b> <span style={{color: "black",textAlign: "right",fontSize:"14px"}}>commented at {created} UTC</span></span>
 					<span style={textNormal}>{this.displayPara(commentBody)}</span>{' '}
           <hr/>
@@ -114,20 +117,20 @@ class readOnePYQ extends Component {
 						<Jumbotron>
 							<h3 style={displayLeftBold}>Comments</h3>
 							<hr/>
-              <Form>
+              
 							<div className="row" style={alignLeft}>
 								<br />
 								<div className="col-md-10">
                   
 								<textarea placeholder="Enter your comment" styles="overflow: hidden; word-wrap: break-word; resize: none;white-space:pre-wrap;" 
-                              ref={(ref) => this.commentTextInput = ref} className="form-control" />
-								</div>
+                        value={this.state.commentTextInput} onChange={this.onChange.bind(this)} className="form-control" />
+								</div>{' '}
 								<div className="col-md-1">
-								<Button onClick={this.addComment} type="submit"> > </Button>
+								<Button onClick={this.addComment} type="submit">></Button>
 								</div>
                 
 							</div>
-              </Form>
+              
 							<hr/>
 							{comments1}
 						</Jumbotron>
@@ -166,8 +169,8 @@ class readOnePYQ extends Component {
                       <b>Subject: {e.subject},   Year: {e.year},    Sem: {e.semester}</b>
                     </Col>
                     <Col className="text-right">
-                        <Button className="btn pull-right" variant="light" size="sm" onClick={() => this.upvote(e.id,e.numberofUpvotes+1)}>
-                        <FontAwesomeIcon icon={faThumbsUp}/>{' '}{e.numberofUpvotes}</Button>
+                        <Button className="btn pull-right" variant="light" size="sm" onClick={() => this.upvote(e.id,this.state.votes+1)}>
+                        <FontAwesomeIcon icon={faThumbsUp}/></Button>{' '}{this.state.votes}
                     </Col>
                 </Row>
                 <Row>

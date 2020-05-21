@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Card, Form, Button, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave, faUndo} from '@fortawesome/free-solid-svg-icons';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 export default class Register extends React.Component {
 	
@@ -32,24 +33,24 @@ export default class Register extends React.Component {
         }
         console.log(user);
 
-        axios.get("/loginData/"+user.rollNumber)
+        axios.get("/loginData/"+user.rollNumber+"/")
 		.then(response => {
 			if(response.data.rollNumber===user.rollNumber)
 			{
-				alert("Sorry, User Id already exists");
+				ToastsStore.warning("User ID already exists")	
 				this.reset();
-				return this.props.history.push('/register');
+				return ;
 			}
 		})
 		.catch(error=>{
 		
 		axios.post("/loginData/", user)
 		.then(response => {
-				this.props.history.push('/');
+				ToastsStore.success("Successfully Registered");
+				this.reset();
 		})
-		.catch(error => alert("please enter valid inputs"));
+		.catch(error => ToastsStore.error("Please enter valid details"));
         });
-        
 	}
 	
 	reset = () => {
@@ -63,6 +64,7 @@ export default class Register extends React.Component {
 		
 		return(
 		<div>
+			<ToastsContainer position={ToastsContainerPosition.TOP_RIGHT} store={ToastsStore}/>
 			<Card className={"border border-dark bg-dark text-white"}>
 			<Card.Header> <h3>STUDENT COLLABORATION PORTAL</h3><br/>
 				Register </Card.Header>

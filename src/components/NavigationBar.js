@@ -32,6 +32,18 @@ class NavigationBar extends React.Component{
         }
     }
 
+    welcome(){
+      if(window.location.href.indexOf("welcome")<=-1)
+         {
+           return(<NavDropdown title="Menu" id="basic-nav-dropdown">
+           <NavDropdown.Item href="/pyq/">Previous Year Questions</NavDropdown.Item>
+           <NavDropdown.Item href="/readIntervieworwrite/">Interview Experiences</NavDropdown.Item>
+           <NavDropdown.Item href="/videoPage/">Video Resources</NavDropdown.Item>
+           <NavDropdown.Item href="/mockSchedule/">Mock Interviews</NavDropdown.Item>
+         </NavDropdown>);
+         }
+    }
+
   render(){
     if(!localStorage.getItem("user"))
     {
@@ -45,13 +57,8 @@ class NavigationBar extends React.Component{
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                  <NavDropdown title="Menu" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="/pyq/">Previous Year Questions</NavDropdown.Item>
-                    <NavDropdown.Item href="/readIntervieworwrite/">Interview Experiences</NavDropdown.Item>
-                    <NavDropdown.Item href="/videoPage/">Video Resources</NavDropdown.Item>
-                    <NavDropdown.Item href="/mockSchedule/">Mock Interviews</NavDropdown.Item>
-                  </NavDropdown>
-                  {this.admin()}
+                {this.admin()}
+                {this.welcome()}  
                 </Nav>
 
           <Nav pullright="true" className="ml-auto">

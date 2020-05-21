@@ -7,7 +7,7 @@ class readExperiences extends Component {
 
     constructor(props){
       super(props);
-      this.state = {exp:[]};
+      this.state = {exp:[],load:true};
   }
 
   writeExp = () =>{
@@ -26,6 +26,7 @@ class readExperiences extends Component {
           return tuple.verified ==true;
         });
         this.setState({exp:verified});
+        this.setState({load:false});
       })
     .catch(error => {
       console.log("error getting");
@@ -33,18 +34,7 @@ class readExperiences extends Component {
   }
 
   // function to return the display html to render
-    fileData = () => { 
-
-      if(this.state.exp)
-      {
-        const exps = this.state.exp.map((e) =>
-            (
-            <tr key={e.id}>
-                <td>{e.title}</td>
-                <td>{e.name}</td>
-                <td>{e.company}</td>
-                <td><a href={"/readOneExp/"+e.id} className={"text-white"}><b> Link </b></a></td>
-            </tr>));
+    fileData = () => {
   
          return(
              
@@ -60,7 +50,21 @@ class readExperiences extends Component {
                             <th>Company</th>
                             <th>Link</th>
                         </tr>
-                        {exps}
+                        {this.state.exp.length<=0?this.state.load?(<tr>
+                                        <td colSpan="6" align="center">
+                                            <b>Loading...</b>
+                                        </td>
+                                        </tr>):(<tr>
+                                        <td colSpan="6" align="center">
+                                            <b>There is no data yet</b>
+                                        </td>
+                                        </tr>):(this.state.exp.map((e) =>
+                                        (<tr key={e.id}>
+                                              <td>{e.title}</td>
+                                              <td>{e.name}</td>
+                                              <td>{e.company}</td>
+                                              <td><a href={"/readOneExp/"+e.id} className={"text-white"}><b> Link </b></a></td>
+                                          </tr>)))}
                         </thead>
                     </Table>
                       <hr/>
@@ -70,8 +74,6 @@ class readExperiences extends Component {
                 </center>
             </div>
           );
-      }
-      return ;
     } 
      
     render() { 

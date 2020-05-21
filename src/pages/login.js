@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Card, Form, Button, Col} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave, faUndo} from '@fortawesome/free-solid-svg-icons';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 export default class Login extends React.Component {
 	
@@ -33,11 +34,12 @@ export default class Login extends React.Component {
 				this.props.history.push('/welcome');
 			} 
 			else{
-				alert("Incorrect password");
+				ToastsStore.error("Incorrect password");
 				this.reset();
 				this.props.history.push('/');
 		}
-		}).catch(error => {alert("please fill valid details-User Id not found");
+		}).catch(error => {
+			ToastsStore.error("please fill valid details-User Id not found");
                 this.reset();});
 
 	}
@@ -60,6 +62,7 @@ export default class Login extends React.Component {
 		return(
 			
 		<div>
+			<ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore}/>
 			<Card className={"border border-dark bg-dark text-white"}>
 			<Card.Header> <h3>STUDENT COLLABORATION PORTAL</h3><br/>
 			Login </Card.Header>
@@ -73,7 +76,7 @@ export default class Login extends React.Component {
 					    	type="text" name="id"
 					    	value={id}
 					    	onChange={this.onChange}
-					    	placeholder="Enter user id" 
+					    	placeholder="Enter Roll Number" 
 					    	className={"bg-dark text-white"}/>
 				  </Form.Group>
 				  <Form.Group as={Col} controlId="formGrid">

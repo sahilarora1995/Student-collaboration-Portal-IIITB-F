@@ -5,6 +5,7 @@ import NavigationBar from '../components/NavigationBar'
 import {Card, Form, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave} from '@fortawesome/free-solid-svg-icons';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 class pyq extends Component {
 	constructor(props) {
@@ -21,7 +22,8 @@ class pyq extends Component {
             year:'',
             request:'',
             images:[],
-            file:null
+            file:null,
+            load:true,
         };
 		
         this.onChange = this.onChange.bind(this);
@@ -39,6 +41,7 @@ class pyq extends Component {
                 return tuple.verified ==true;
               });
               this.setState({images:verified});
+              this.setState({load:false});
         })
         .catch(error => {
         console.log("error getting");
@@ -54,7 +57,7 @@ class pyq extends Component {
         var sem=this.state.selectedSem;
 
         if(year==''||subject=='')
-            return alert("Please fill all details");
+            return ToastsStore.error("Please fill all details");
 
         params.subject=subject;
         params.year=year;
@@ -62,15 +65,17 @@ class pyq extends Component {
         params.semester=sem;
 
         console.log(params);
+        this.setState({load:true});
 
         axios.get('/getData/',
         {params}
         ).
         then(Response =>{
-            var unverified =  Response.data.filter(function(tuple) {
+            var verified =  Response.data.filter(function(tuple) {
                 return tuple.verified ==true;
               });
-              this.setState({images:unverified});
+              this.setState({images:verified});
+              this.setState({load:false});
         }).
         catch(error => {
         console.log("error getting");
@@ -90,7 +95,7 @@ class pyq extends Component {
     onPost(e){
         e.preventDefault();
         if(this.state.file==null||this.state.year==''||this.state.selectedSub=='')
-            return alert("Please fill all the details");
+            return ToastsStore.error("Please fill all details");
 
         this.fileUpload(this.state.file).then((response)=>{
           console.log(response.data);
@@ -120,17 +125,6 @@ class pyq extends Component {
       }
 
     fileDownload = () => {
-
-        if(this.state.images)
-        {
-          const image1 = this.state.images.map((e) =>
-            (
-            <tr key={e.id}>
-                <td>{e.semester}</td>
-                <td>{e.subject}</td>
-                <td>{e.year}</td>
-                <td><a href={"/readOnePYQ/"+e.id} className={"text-white"}><b> Link </b></a></td>
-            </tr>));
   
          return(
              
@@ -144,15 +138,30 @@ class pyq extends Component {
                             <th>Year</th>
                             <th>Link</th>
                         </tr>
-                        {image1}
+                            {this.state.images.length<=0?
+                                this.state.load?(<tr>
+                                        <td colSpan="6" align="center">
+                                            <b>Loading...</b>
+                                        </td>
+                                        </tr>):(<tr>
+                                        <td colSpan="6" align="center">
+                                            <b>There is no data yet</b>
+                                        </td>
+                                        </tr>):(this.state.images.map((e) =>
+                                                    (
+                                                    <tr key={e.id}>
+                                                        <td>{e.semester}</td>
+                                                        <td>{e.subject}</td>
+                                                        <td>{e.year}</td>
+                                                        <td><a href={"/readOnePYQ/"+e.id} className={"text-white"}><b> Link </b></a></td>
+                                                    </tr>)))}
                         </thead>
                     </Table>
                 
                 </center>
             </div>
           );
-        }
-        return ;
+
       }
     
 
@@ -167,6 +176,7 @@ class pyq extends Component {
 		return(
 		<div>
             <NavigationBar/>
+            <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore}/>
 			<Card className={"border border-dark bg-dark text-white"}>
 			<Card.Header> Previous Year Questions </Card.Header>
 			

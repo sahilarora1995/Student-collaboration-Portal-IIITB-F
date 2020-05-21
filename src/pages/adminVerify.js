@@ -5,12 +5,14 @@ import NavigationBar from '../components/NavigationBar'
 import {Card, Button,ButtonGroup} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSave,faTrash,faList} from '@fortawesome/free-solid-svg-icons';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
+import {Redirect} from 'react-router-dom';
 
 class adminVerify extends Component {
 	constructor(props) {
             super(props);
             this.state={
-                data:[]
+                data:[],load:true
         };
     }
     
@@ -26,7 +28,7 @@ class adminVerify extends Component {
                 return tuple.verified ==false;
               });
               this.setState({data:verified});
-              console.log(verified);
+              this.setState({load:false});
         })
         .catch(error => {
         console.log("error getting");
@@ -43,7 +45,8 @@ class adminVerify extends Component {
 			if (response.data != null) {
 				this.setState({
 					data: this.state.data.filter(data => data.id !== id)
-				});
+                });
+                ToastsStore.error("Successfully deleted");
             }
             else{
                 alert("not deleted");
@@ -61,10 +64,10 @@ class adminVerify extends Component {
           }
         axios.patch(url,data,{headers:{'Content-Type':'application/json'}})
         .then(Response => {
-            console.log(Response)
             this.setState({
                 data: this.state.data.filter(data => data.id !== id)
             });
+            ToastsStore.success("Successfully Verified");
         })
         .catch(e => console.log("error"))
     }
@@ -90,18 +93,21 @@ class adminVerify extends Component {
                             <th>LINK</th>
                             <th>VERIFY</th>
                         </tr>
-                        {this.state.data.length <= 0 ? (
-                                    <tr>
+                        {this.state.data.length <= 0 ?this.state.load?(<tr>
+                                        <td colSpan="6" align="center">
+                                            <b>Loading...</b>
+                                        </td>
+                                        </tr>):(<tr>
                                         <td colSpan="6" align="center">
                                             <b>There is no data yet</b>
                                         </td>
-                                    </tr>
-                                    ):
+                                        </tr>):
                                     this.state.data.map((e) =>
                                     (
                                         <tr key={e.id}>
                                             <td>{e.id}</td>
-                                            <td><a href={url+e.id} className={"text-white"}><b> Link </b></a></td>
+                                            <td><a href={url+e.id} className={"text-white"} target="_blank"><b> Link </b></a>
+                                            </td>
                                             <td>
                                                 <ButtonGroup>
                                                     <Button size='sm' variant="outline-success" onClick={this.patch.bind(this, e.id,true)}><FontAwesomeIcon icon={faSave}/></Button>
@@ -118,10 +124,16 @@ class adminVerify extends Component {
       }
 
 	render() {
+        if(localStorage.getItem("role")==="student")
+        {
+            alert("You don't have access to this page");            
+            return <Redirect to="/welcome"></Redirect>;
+        }
 
 		return(
 		<div>
             <NavigationBar/>
+            <ToastsContainer position={ToastsContainerPosition.TOP_RIGHT} store={ToastsStore}/>
 			    {this.fileDownload()}
 		</div>
 		);

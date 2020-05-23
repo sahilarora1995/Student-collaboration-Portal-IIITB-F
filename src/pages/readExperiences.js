@@ -7,12 +7,17 @@ class readExperiences extends Component {
 
     constructor(props){
       super(props);
-      this.state = {exp:[],load:true};
+      this.state = { filter: "",exp:[],load:true};
   }
 
   writeExp = () =>{
     this.props.history.push("/writeExp");
   }
+
+  
+  handleChange = event => {
+    this.setState({ filter: event.target.value });
+  };
   
   // get request may take few seconds, meanwhile response will have [Promise] object, once the data is got, response gets converted to JSON string
   // so using async, await for the response to load
@@ -36,11 +41,29 @@ class readExperiences extends Component {
   // function to return the display html to render
     fileData = () => {
   
-         return(
-             
+      //filtering data 
+      var { filter,exp } = this.state;
+      filter = filter.toLowerCase();
+      var filteredData = [];
+      filteredData=exp.filter(item => {
+        var temp=String(item.company);
+        if( temp.indexOf(filter)!== -1 || String(item.title.toLowerCase()).indexOf(filter)!== -1 || String(item.name.toLowerCase).indexOf(filter)!== -1 )
+        return item;
+      });
+         return(    
             <div>
                 <center>
+                     
+                <div class="searchBox">
+                <input class="searchInput"type="text" value={filter} onChange={this.handleChange} name="" placeholder="Search"/>
+                <button class="searchButton" href="#">
+                <i class="material-icons">
+                 search
+                </i>
+                </button>
+                </div>
                   <Jumbotron>
+                    <br/>
                     <h2 style={{color:"black"}}>Interview Experiences</h2><br/>
                     <Table className={"border border-dark bg-dark text-white"}>
                         <thead>
@@ -58,7 +81,13 @@ class readExperiences extends Component {
                                         <td colSpan="6" align="center">
                                             <b>There is no data yet</b>
                                         </td>
-                                        </tr>):(this.state.exp.map((e) =>
+                                        </tr>):(filteredData.length>0)?(filteredData.map((e) =>
+                                        (<tr key={e.id}>
+                                              <td>{e.title}</td>
+                                              <td>{e.name}</td>
+                                              <td>{e.company}</td>
+                                              <td><a href={"/readOneExp/"+e.id} className={"text-white"}><b> Link </b></a></td>
+                                          </tr>))):(exp.map((e) =>
                                         (<tr key={e.id}>
                                               <td>{e.title}</td>
                                               <td>{e.name}</td>
@@ -73,11 +102,13 @@ class readExperiences extends Component {
                 
                 </center>
             </div>
+
+            
           );
     } 
      
     render() { 
-
+     
        const marginTop={
         marginTop:"20px",
         alignItems:"center"

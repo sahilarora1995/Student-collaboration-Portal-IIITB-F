@@ -49,7 +49,7 @@ class pyq extends Component {
     }
 
     onGet(){
-
+                
         var params={};
         var subject=this.state.selectedSub;
         var year=this.state.year;

@@ -25,7 +25,7 @@ class readExperiences extends Component {
 
   async componentDidMount(){
 
-    await axios.get('/interviewData/')
+    await axios.get('http://localhost:8000/interviewData/')
     .then(Response =>{
         var verified =  Response.data.filter(function(tuple) {
           return tuple.verified ==true;

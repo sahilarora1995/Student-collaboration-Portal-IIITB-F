@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import axios, { post } from 'axios';
-import { Col, Table } from 'react-bootstrap'
+import { Col, Table ,Jumbotron} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 import { Card, Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
+import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toasts';
 
 class videoPage extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
+		this.state = {filter:"",
 			semesters: [
 				{ sem: 1, subjects: ['Algorithms', 'ML', 'MML', 'SS', 'CNW', 'Discrete Mathematics'] },
 				{ sem: 2, subjects: ['SPE', 'Data Modelling', 'WAN', 'MAS'] },
-				{ sem: 3, subjects: ['job3-1', 'job3-2', 'job3-3'] },
-				{ sem: 4, subjects: ['job3-1', 'job3-2', 'job3-3'] }
+				{ sem: 3, subjects: ['DesignPatterns', 'ASR', 'OOAD']},
+				{ sem: 4, subjects: ['thesis'] }
 			],
 			semester: 1,
 			subject: '',
 			speaker: '',
 			year: '',
 			videos: [],
-			file: null
+			file: null,
+			load:true,
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -33,12 +35,13 @@ class videoPage extends Component {
 	}
 	
 	async componentDidMount() {
-		await axios.get('/getVideoData/')
+		await axios.get('http://localhost:8000/getVideoData/')
 			.then(Response => {
 				var verified = Response.data.filter(function (tuple) {
 					return tuple.verified == true;
 				});
 				this.setState({ videos: verified });
+				this.setState({load:false});
 			})
 			.catch(error => {
 				console.log("error getting");
@@ -59,12 +62,14 @@ class videoPage extends Component {
 		if (speaker) params.speaker = speaker;
 		console.log(params);
 
-		axios.get('/getVideoData/', { params })
+		this.setState({load:true});
+		axios.get('http://localhost:8000/getVideoData/', { params })
 			.then(response => {
 				var verifiedVideos = response.data.filter(function (tuple) {
 					return tuple.verified == true;
 				});
 				this.setState({ videos: verifiedVideos });
+				this.setState({load:false});
 			}).catch(error => {
 				console.log("error getting");
 			});
@@ -88,16 +93,17 @@ class videoPage extends Component {
 
 		this.fileUpload(this.state.file)
 		.then((response) => {
-			console.log(response.data);
+			ToastsStore.success("Successful, admin will verify");
+
 		}).catch(error => {
-			console.log("Error while posting data\n"+error);
+			ToastsStore.warning("Error in posting");
 		})
 
 		//this.props.history.push('/verify');
 	}
 
 	fileUpload(file) {
-		const url = '/postVideoData/';
+		const url = 'http://localhost:8000/postVideoData/';
 		const formData = new FormData();
 		formData.set('subject', this.state.subject);
 		formData.set('year', this.state.year);
@@ -115,23 +121,30 @@ class videoPage extends Component {
 		return post(url, formData, config)
 	}
 
+	handleChange = event => {
+        this.setState({ filter: event.target.value });
+      };
+
 	videosList = () => {
 
-		if (this.state.videos) {
-			const video = this.state.videos.map((e) =>
-				(
-					<tr key={e.id}>
-						<td>{e.semester}</td>
-						<td>{e.subject}</td>
-						<td>{e.year}</td>
-						<td>{e.speaker}</td>
-						<td><a href={"/playVideo/"+e.id} className={"text-white"}><b> Watch Video </b></a></td>
-					</tr>));
+		var { filter,videos } = this.state;
+        filter = filter.toLowerCase();
+        var filteredData = [];
+        filteredData=videos.filter(item => {
+			if( String(item.semester).indexOf(filter)!== -1 || String(item.subject.toLowerCase()).indexOf(filter)!== -1 || String(item.year).indexOf(filter)!== -1 
+		|| String(item.speaker.toLowerCase()).indexOf(filter)!== -1)
+                return item;
+        });	
 
 			return (
 
 				<div>
-					<center>
+                
+                  <Jumbotron className={"border border-dark bg-dark text-white"}>
+                  <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', width:'300px'}}>
+                	<Form.Control className={"border border-white bg-dark text-white"} type="text" value={filter} onChange={this.handleChange} name="" placeholder="Search"/>
+                	</div>
+					<br/>
 						<Table className={"border border-dark bg-dark text-white"}>
 							<thead>
 								<tr>
@@ -141,17 +154,37 @@ class videoPage extends Component {
 									<th>Speaker</th>
 									<th>Link</th>
 								</tr>
-								{video}
+								{this.state.videos.length<=0?
+                                this.state.load?(<tr>
+                                        <td colSpan="6" align="center">
+                                            <b>Loading...</b>
+                                        </td>
+                                        </tr>):(<tr>
+                                        <td colSpan="6" align="center">
+                                            <b>There is no data yet</b>
+                                        </td>
+                                        </tr>):(filteredData.length>0)?(filteredData.map((e) =>
+                                        (<tr key={e.id}>
+                                              	<td>{e.semester}</td>
+												<td>{e.subject}</td>
+												<td>{e.year}</td>
+												<td>{e.speaker}</td>
+												<td><a href={"/playVideo/"+e.id} className={"text-white"}><b> Watch Video </b></a></td>
+                                          </tr>))):(this.state.videos.map((e) =>
+                                                    (
+                                                    <tr key={e.id}>
+                                                        <td>{e.semester}</td>
+														<td>{e.subject}</td>
+														<td>{e.year}</td>
+														<td>{e.speaker}</td>
+														<td><a href={"/playVideo/"+e.id} className={"text-white"}><b> Watch Video </b></a></td>
+                                                    </tr>)))}
 							</thead>
 						</Table>
-
-					</center>
+						</Jumbotron>
 				</div>
 			);
-		}
-		return;
 	}
-
 
 	render() {
 
@@ -164,6 +197,7 @@ class videoPage extends Component {
 		return (
 			<div>
 				<NavigationBar />
+				<ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore}/>
 				<Card className={"border border-dark bg-dark text-white"}>
 					<Card.Header> Videos </Card.Header>
 

@@ -65,7 +65,7 @@ class NewStudentForm1 extends React.Component {
             name="name"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.name)}
-            placeholder="Martin Luther King, Jr."
+            placeholder="Name"
           />
         </FormGroup>
         <FormGroup>

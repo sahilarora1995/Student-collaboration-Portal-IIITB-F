@@ -16,7 +16,7 @@ class NewStudentForm extends React.Component {
 
   componentDidMount() {
     if (this.props.student) {
-      const { pk, name, email, day, time, phone,about } = this.props.student;
+      var { pk, name, email, day, time, phone,about } = this.props.student;
       this.setState({pk, name, email, day, time, phone, about });
     }
   }
@@ -39,7 +39,7 @@ class NewStudentForm extends React.Component {
     axios.put(API_URL + this.state.pk, this.state).then(() => {
       this.props.resetState();
       this.props.toggle();
-      alert("clicked")
+      alert("Successfully Edited")
     });
 
   };
@@ -58,7 +58,7 @@ class NewStudentForm extends React.Component {
             name="name"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.name)}
-            placeholder = "Dolaaand Trump"
+            placeholder = "Name"
           />
         </FormGroup>
         <FormGroup>
@@ -68,7 +68,7 @@ class NewStudentForm extends React.Component {
             name="email"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.email)}
-            placeholder = "trump@potus.gov.us"
+            placeholder = "email@iiitb.org"
           />
         </FormGroup>
         <FormGroup>

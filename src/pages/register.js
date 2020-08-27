@@ -33,7 +33,7 @@ export default class Register extends React.Component {
         }
         console.log(user);
 
-        axios.get("/loginData/"+user.rollNumber+"/")
+        axios.get("http://localhost:8000/loginData/"+user.rollNumber+"/")
 		.then(response => {
 			if(response.data.rollNumber===user.rollNumber)
 			{
@@ -44,12 +44,12 @@ export default class Register extends React.Component {
 		})
 		.catch(error=>{
 		
-		axios.post("/loginData/", user)
+		axios.post("http://localhost:8000/loginData/", user)
 		.then(response => {
 				ToastsStore.success("Successfully Registered");
 				this.reset();
 		})
-		.catch(error => ToastsStore.error("Please enter valid details"));
+		.catch(error => console.log(error));
         });
 	}
 	

@@ -12,13 +12,13 @@ export default class playVideo extends React.Component {
 	}
 	async componentDidMount() {
 		const videoId = this.props.match.params.id;
-		await axios.get('/getVideoData/' + videoId)
+		await axios.get('http://localhost:8000/getVideoData/' + videoId+"/")
 			.then(response => {
 				this.setState({ video: response.data });
 			}).catch(error => {
 				console.log("Error in getting video : " + error);
 			});
-		await axios.get("/commentsOnVideo/" + videoId)
+		await axios.get("http://localhost:8000/commentsOnVideo/" + videoId +"/")
 			.then(response => {
 				this.setState({ comments: response.data });
 			}).catch(error => {
@@ -35,9 +35,9 @@ export default class playVideo extends React.Component {
 				videocontent: vidId
 			};
 			
-			axios.post("/commentsOnVideo/"+vidId+"/", com)
+			axios.post("http://localhost:8000/commentsOnVideo/"+vidId+"/", com)
 			.then( response => {
-				axios.get("/commentsOnVideo/"+vidId)
+				axios.get("http://localhost:8000/commentsOnVideo/"+vidId +"/")
 				.then(res => {
 					this.setState({comments: res.data});
 				}).catch(err => {

@@ -20,7 +20,7 @@ class readOnePYQ extends Component {
 
   async componentDidMount(){
 
-    await axios.get('/getData/'+this.props.match.params.id+"/")
+    await axios.get('http://localhost:8000/getData/'+this.props.match.params.id+"/")
     .then(Response =>{
       this.setState({exp:Response.data,votes:Response.data.numberofUpvotes});
     })
@@ -29,7 +29,7 @@ class readOnePYQ extends Component {
         this.props.history.push("/pyq");
     })
 
-    await axios.get("/pyq/comments/"+this.props.match.params.id+"/")
+    await axios.get("http://localhost:8000/pyq/comments/"+this.props.match.params.id+"/")
 		.then(response => {
 			this.setState({comments: response.data});
 		}).catch(error => {
@@ -38,12 +38,13 @@ class readOnePYQ extends Component {
   }
 
   patch = (id,data) => {
-    let url="/getData/"+id+"/";
-    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} )
+	const id1=parseInt(id,10);
+    let url="http://localhost:8000/patchData/"+id1+"/";
+    axios.put(url,data,{headers:{'Content-Type':'application/json'}} )
     .then(Response => {
       this.setState({votes: this.state.votes+1});
     })
-    .catch(e => console.log("error"))
+    .catch(e => console.log(e))
   }
   upvote = (id,num) => {
     const data={
@@ -61,10 +62,10 @@ class readOnePYQ extends Component {
 				pyq: id,
       };
       
-			let url="/pyq/comments/"+id+"/";
+			let url="http://localhost:8000/pyq/comments/"+id+"/";
 			axios.post(url, com,{headers:{'Content-Type':'application/json'}})
 			.then( response => {
-				axios.get("/pyq/comments/"+this.props.match.params.id+"/")
+				axios.get("http://localhost:8000/pyq/comments/"+this.props.match.params.id+"/")
 				.then(res => {
           this.setState({comments: res.data});
           this.setState({commentTextInput:''});

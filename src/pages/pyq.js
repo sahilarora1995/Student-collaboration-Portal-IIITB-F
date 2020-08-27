@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios, { post } from 'axios';
-import  {Col,Table} from 'react-bootstrap'
+import  {Col,Table, Jumbotron} from 'react-bootstrap'
 import NavigationBar from '../components/NavigationBar'
 import {Card, Form, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -10,12 +10,12 @@ import {ToastsContainer, ToastsStore, ToastsContainerPosition} from 'react-toast
 class pyq extends Component {
 	constructor(props) {
             super(props);
-            this.state={
+            this.state={filter:"",
             semesters:[
             { sem: 1,  subjects: ['Algorithms', 'ML', 'MML','SS','CNW','Discrete Mathematics']},
             { sem: 2, subjects: ['SPE', 'Data Modelling', 'WAN','MAS']},
-            { sem: 3, subjects: ['job3-1', 'job3-2', 'job3-3']},
-            { sem: 4, subjects: ['job3-1', 'job3-2', 'job3-3']}
+            { sem: 3, subjects: ['DesignPatterns', 'ASR', 'OOAD']},
+            { sem: 4, subjects: ['thesis']}
             ],
             selectedSem:1,
             selectedSub:'',
@@ -35,7 +35,7 @@ class pyq extends Component {
     }
     
     async componentDidMount(){
-        await axios.get('/getData/')
+        await axios.get('http://localhost:8000/getData/')
         .then(Response =>{
             var verified =  Response.data.filter(function(tuple) {
                 return tuple.verified ==true;
@@ -56,18 +56,14 @@ class pyq extends Component {
         var resourcetype="PYQ";
         var sem=this.state.selectedSem;
 
-        if(year==''||subject=='')
-            return ToastsStore.error("Please fill all details");
+        if (subject) params.subject = subject;
+		if (year) params.year = year;
+		if (sem) params.semester = sem;
 
-        params.subject=subject;
-        params.year=year;
         params.resourceType=resourcetype;
-        params.semester=sem;
-
-        console.log(params);
         this.setState({load:true});
 
-        axios.get('/getData/',
+        axios.get('http://localhost:8000/getData/',
         {params}
         ).
         then(Response =>{
@@ -97,15 +93,17 @@ class pyq extends Component {
         if(this.state.file==null||this.state.year==''||this.state.selectedSub=='')
             return ToastsStore.error("Please fill all details");
 
-        this.fileUpload(this.state.file).then((response)=>{
-          console.log(response.data);
-        })
+        this.fileUpload(this.state.file).then((response) => {
+			ToastsStore.success("Successful, admin will verify");
+
+		}).catch(error => {
+			ToastsStore.warning("Error in posting");
+		})
     
-        this.props.history.push('/verify');
       }
     
       fileUpload(file){
-        const url = '/postData/';
+        const url = 'http://localhost:8000/postData/';
         const formData = new FormData();
         formData.set('subject',this.state.selectedSub);
         formData.set('year',this.state.year);
@@ -124,13 +122,31 @@ class pyq extends Component {
         return  post(url, formData,config)
       }
 
+      handleChange = event => {
+        this.setState({ filter: event.target.value });
+      };
+
     fileDownload = () => {
+        var { filter,images } = this.state;
+        filter = filter.toLowerCase();
+        var filteredData = [];
+        filteredData=images.filter(item => {
+            if( String(item.semester).indexOf(filter)!== -1 || String(item.subject.toLowerCase()).indexOf(filter)!== -1 || String(item.year).indexOf(filter)!== -1 )
+                return item;
+        });
   
          return(
              
             <div>
-                <center>
+                
+                  <Jumbotron className={"border border-dark bg-dark text-white"}>
+                  <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', width:'300px'}}>
+                <Form.Control className={"border border-white bg-dark text-white"} type="text" value={filter} onChange={this.handleChange} name="" placeholder="Search"/>
+                </div>
+                    <br/>
+                    <h2 style={{color:"black"}}></h2><br/>
                     <Table className={"border border-dark bg-dark text-white"}>
+                        
                         <thead>
                         <tr>
                             <th>Semester</th>
@@ -147,7 +163,13 @@ class pyq extends Component {
                                         <td colSpan="6" align="center">
                                             <b>There is no data yet</b>
                                         </td>
-                                        </tr>):(this.state.images.map((e) =>
+                                        </tr>):(filteredData.length>0)?(filteredData.map((e) =>
+                                        (<tr key={e.id}>
+                                              <td>{e.semester}</td>
+                                              <td>{e.subject}</td>
+                                              <td>{e.year}</td>
+                                              <td><a href={"/readOnePYQ/"+e.id} className={"text-white"}><b> Link </b></a></td>
+                                          </tr>))):(this.state.images.map((e) =>
                                                     (
                                                     <tr key={e.id}>
                                                         <td>{e.semester}</td>
@@ -157,8 +179,8 @@ class pyq extends Component {
                                                     </tr>)))}
                         </thead>
                     </Table>
+                    </Jumbotron>
                 
-                </center>
             </div>
           );
 

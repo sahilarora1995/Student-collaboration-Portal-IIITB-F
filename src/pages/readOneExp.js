@@ -20,7 +20,7 @@ class readOneExp extends Component {
 
   async componentDidMount(){
 
-    await axios.get('/interviewData/'+this.props.match.params.id+"/").
+    await axios.get('http://localhost:8000/interviewData/'+this.props.match.params.id+"/").
     then(Response =>{
       this.setState({exp:Response.data,votes:Response.data.numberofUpvotes});
       console.log(this.state.exp);
@@ -29,7 +29,7 @@ class readOneExp extends Component {
       alert("Post does not exist");
         this.props.history.push("/readExperiences");
     })
-    await axios.get("/exp/comments/"+this.props.match.params.id+"/")
+    await axios.get("http://localhost:8000/exp/comments/"+this.props.match.params.id+"/")
 		.then(response => {
 			this.setState({comments: response.data});
 		}).catch(error => {
@@ -38,12 +38,12 @@ class readOneExp extends Component {
   }
 
   patch = (id,data) => {
-    let url="/interviewData/"+id+"/";
-    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} )
+    let url="http://localhost:8000/interviewData/"+id+"/";
+    axios.put(url,data,{headers:{'Content-Type':'application/json'}} )
     .then(Response => {
       this.setState({votes: this.state.votes+1});
     })
-    .catch(e => console.log("error"))
+    .catch(e => console.log(e))
   }
   upvote = (id,num) => {
     const data={
@@ -61,10 +61,10 @@ class readOneExp extends Component {
 				exp: id,
       };
       
-			let url="/exp/comments/"+id+"/";
+			let url="http://localhost:8000/exp/comments/"+id+"/";
 			axios.post(url, com,{headers:{'Content-Type':'application/json'}})
 			.then( response => {
-				axios.get("/exp/comments/"+this.props.match.params.id+"/")
+				axios.get("http://localhost:8000/exp/comments/"+this.props.match.params.id+"/")
 				.then(res => {
           this.setState({comments: res.data});
           this.setState({commentTextInput:''});

@@ -19,7 +19,7 @@ class adminVerify extends Component {
     async componentDidMount(){
         var id=this.props.match.params.id;
         var url="";
-        (id==1)?(url="/getData"):(id==2)?(url="/interviewData"):(url="/getVideoData");
+        (id==1)?(url="http://localhost:8000/getData/"):(id==2)?(url="http://localhost:8000/interviewData/"):(url="http://localhost:8000/getVideoData/");
         console.log(url);
 
         await axios.get(url)
@@ -38,7 +38,7 @@ class adminVerify extends Component {
     delete = (id) => {
         var parid=this.props.match.params.id;
         var url="";
-        (parid==1)?(url="/deleteData/"):(parid==2)?(url="/interviewData/"):(url="/deleteVideoData/");
+        (parid==1)?(url="http://localhost:8000/deleteData/"):(parid==2)?(url="http://localhost:8000/interviewData/"):(url="http://localhost:8000/deleteVideoData/");
         url += id+"/";
 		axios.delete(url)
 		.then(response => {
@@ -57,7 +57,7 @@ class adminVerify extends Component {
     patch = (id,ver) => {
         var parid=this.props.match.params.id;
         var url="";
-        (parid==1)?(url="/getData/"):(parid==2)?(url="/interviewData/"):(url="/updateVideoData/");
+        (parid==1)?(url="http://localhost:8000/getData/"):(parid==2)?(url="http://localhost:8000/interviewData/"):(url="http://localhost:8000/updateVideoData/");
         url += id+"/";
         const data={
             verified: ver,
@@ -133,7 +133,7 @@ class adminVerify extends Component {
 		return(
 		<div>
             <NavigationBar/>
-            <ToastsContainer position={ToastsContainerPosition.TOP_RIGHT} store={ToastsStore}/>
+            <ToastsContainer position={ToastsContainerPosition.TOP_CENTER} store={ToastsStore}/>
 			    {this.fileDownload()}
 		</div>
 		);

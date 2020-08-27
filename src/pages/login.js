@@ -25,7 +25,7 @@ export default class Login extends React.Component {
 			password:this.state.password,
         }
 		
-		axios.get("/loginData/"+user.id)
+		axios.get("http://localhost:8000/loginData/"+user.id+"/")
 		.then(response => {
 			if(response.data.rollNumber===user.id && response.data.password===user.password)
 			{

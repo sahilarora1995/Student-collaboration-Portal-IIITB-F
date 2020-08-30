@@ -46,6 +46,19 @@ class writeExp extends Component {
         marginTop:"20px",
         alignItems:"center"
       }
+
+      // for spanning years from 1999 to current year + 5 
+      const graduationYear = [];
+      const thisYear = (new Date()).getFullYear();
+      for (let year = thisYear + 5; year >= 1999; year--) {
+        graduationYear.push(<option value={year}>{year}</option>);
+      }
+
+      // for spanning years from 1999 to current year
+      const options = [];
+      for (let year = thisYear; year >= 1999; year--) {
+      options.push(<option value={year}>{year}</option>);
+      }
      
         return (
           
@@ -65,13 +78,7 @@ class writeExp extends Component {
                                 <Form.Label>Graduation Year from IIITB</Form.Label>
                                 <Form.Control as="select" value={this.state.grad_year} name="grad_year" onChange={this.onChange} required className={"bg-dark text-white"}>
                                   <option></option>
-                                  <option value="2014">2014</option>
-                                  <option value="2015">2015</option>
-                                  <option value="2016">2016</option>
-                                  <option value="2017">2017</option>
-                                  <option value="2018">2018</option>
-                                  <option value="2019">2019</option>
-                                  <option value="2020">2020</option>
+                                  {graduationYear}
                                 </Form.Control>
                           </Form.Group>
                           <Form.Group as={Col} controlId="formGrid">
@@ -84,13 +91,7 @@ class writeExp extends Component {
                                 <Form.Label>Placement year</Form.Label>
                                 <Form.Control as="select" value={this.state.placed_year} name="placed_year" onChange={this.onChange} required className={"bg-dark text-white"}>
                                   <option></option>
-                                  <option value="2014">2014</option>
-                                  <option value="2015">2015</option>
-                                  <option value="2016">2016</option>
-                                  <option value="2017">2017</option>
-                                  <option value="2018">2018</option>
-                                  <option value="2019">2019</option>
-                                  <option value="2020">2020</option>
+                                  {options}
                                 </Form.Control>
                           </Form.Group>
                         </Form.Row>

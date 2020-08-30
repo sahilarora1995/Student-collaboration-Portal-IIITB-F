@@ -24,6 +24,7 @@ class pyq extends Component {
             images:[],
             file:null,
             load:true,
+            
         };
 		
         this.onChange = this.onChange.bind(this);
@@ -195,6 +196,13 @@ class pyq extends Component {
             semester=semester1.subjects;
         })
 
+        // for spanning years from 1999 to current year
+        const options = [];
+        const thisYear = (new Date()).getFullYear();
+        for (let year = thisYear; year >= 1999; year--) {
+        options.push(<option value={year}>{year}</option>);
+        }
+
 		return(
 		<div>
             <NavigationBar/>
@@ -231,13 +239,7 @@ class pyq extends Component {
 				  		<Form.Label>year</Form.Label>
                           <Form.Control as="select" value={this.state.year} name="year" onChange={this.onChange} required className={"bg-dark text-white"}>
                           <option></option>
-                          <option value="2014">2014</option>
-                          <option value="2015">2015</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
+                          {options}
                             </Form.Control>
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGrid">

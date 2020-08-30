@@ -40,7 +40,7 @@ class readOnePYQ extends Component {
   patch = (id,data) => {
 	const id1=parseInt(id,10);
     let url="http://localhost:8000/patchData/"+id1+"/";
-    axios.put(url,data,{headers:{'Content-Type':'application/json'}} )
+    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} )
     .then(Response => {
       this.setState({votes: this.state.votes+1});
     })

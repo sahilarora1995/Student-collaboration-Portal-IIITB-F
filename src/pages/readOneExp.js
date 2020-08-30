@@ -39,7 +39,7 @@ class readOneExp extends Component {
 
   patch = (id,data) => {
     let url="http://localhost:8000/interviewData/"+id+"/";
-    axios.put(url,data,{headers:{'Content-Type':'application/json'}} )
+    axios.patch(url,data,{headers:{'Content-Type':'application/json'}} )
     .then(Response => {
       this.setState({votes: this.state.votes+1});
     })
